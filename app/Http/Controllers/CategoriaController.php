@@ -2,63 +2,102 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categoria;
 use Illuminate\Http\Request;
 
 class CategoriaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $categorias = Categoria::all();
+        return response()->json($categorias);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {
-        //
+        $categoria = Categoria::create($request->all());
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Categoria creada satisfactoriamente',
+            'categoria' => $categoria
+        ], 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show(string $id)
     {
-        //
+        $categoria = Categoria::find($id);
+
+        if (!$categoria) {
+            return response()->json([
+                'status' => false,
+                'error' => 'No se encontró la categoria',
+            ], 404);
+        }
+
+        return response()->json($categoria);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit(string $id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(Request $request, string $id)
     {
-        //
+        $categoria = Categoria::find($id);
+
+        if (!$categoria) {
+            return response()->json([
+                'status' => false,
+                'error' => 'No se encontró la categoria',
+            ], 404);
+        }
+
+        $categoria->update($request->all());
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Categoria actualizada satisfactoriamente',
+            'categoria' => $categoria
+        ], 200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(string $id)
     {
-        //
+        $categoria = Categoria::find($id);
+
+        if (!$categoria) {
+            return response()->json([
+                'status' => false,
+                'error' => 'No se encontró la categoria',
+            ], 404);
+        }
+
+        if (!$categoria->productos->isEmpty() || !$categoria->servicios->isEmpty()) {
+            return response()->json([
+                'status' => false,
+                'error' => 'No se puede eliminar la categoria porque tiene productos o servicios asociados',
+            ], 500);
+        }
+
+        $categoria->delete();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Categoria eliminada satisfactoriamente',
+            'categoria' => $categoria
+        ], 200);
     }
 }

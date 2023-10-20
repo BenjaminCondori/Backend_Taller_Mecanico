@@ -40,7 +40,10 @@ class ModeloController extends Controller
         $modelo = Modelo::find($id);
 
         if (!$modelo) {
-            return response()->json(['error' => 'No se encontró el modelo'], 404);
+            return response()->json([
+                'status' => false,
+                'error' => 'No se encontró el modelo'
+            ], 404);
         }
 
         return response()->json($modelo);
@@ -78,7 +81,10 @@ class ModeloController extends Controller
         $modelo = Modelo::find($id);
 
         if (!$modelo) {
-            return response()->json(['error' => 'No se encontró el modelo'], 404);
+            return response()->json([
+                'status' => false,
+                'error' => 'No se encontró el modelo'
+            ], 404);
         }
 
         $modelo->delete();
