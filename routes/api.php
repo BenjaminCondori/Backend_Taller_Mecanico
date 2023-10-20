@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\EmpleadoController;
+use App\Http\Controllers\MarcaController;
+use App\Http\Controllers\ModeloController;
+use App\Http\Controllers\PuestoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -33,4 +36,32 @@ Route::post('/empleados', [EmpleadoController::class, 'store']);
 Route::get('/empleados/{id}', [EmpleadoController::class, 'show']);
 Route::put('/empleados/{id}', [EmpleadoController::class, 'update']);
 Route::delete('/empleados/{id}', [EmpleadoController::class, 'destroy']);
+
+Route::get('/marcas', [MarcaController::class, 'index']);
+Route::post('/marcas', [MarcaController::class, 'store']);
+Route::get('/marcas/{id}', [MarcaController::class, 'show']);
+Route::put('/marcas/{id}', [MarcaController::class, 'update']);
+Route::delete('/marcas/{id}', [MarcaController::class, 'destroy']);
+
+Route::get('/modelos', [ModeloController::class, 'index']);
+Route::post('/modelos', [ModeloController::class, 'store']);
+Route::get('/modelos/{id}', [ModeloController::class, 'show']);
+Route::put('/modelos/{id}', [ModeloController::class, 'update']);
+Route::delete('/modelos/{id}', [ModeloController::class, 'destroy']);
+
+Route::get('/modelos', [ModeloController::class, 'index']);
+Route::post('/modelos', [ModeloController::class, 'store']);
+Route::get('/modelos/{id}', [ModeloController::class, 'show']);
+Route::put('/modelos/{id}', [ModeloController::class, 'update']);
+Route::delete('/modelos/{id}', [ModeloController::class, 'destroy']);
+
+Route::get('/puestos', [PuestoController::class, 'index']);
+Route::post('/puestos', [PuestoController::class, 'store']);
+Route::get('/puestos/{id}', [PuestoController::class, 'show']);
+Route::put('/puestos/{id}', [PuestoController::class, 'update']);
+Route::delete('/puestos/{id}', [PuestoController::class, 'destroy']);
+
+
+
+
 

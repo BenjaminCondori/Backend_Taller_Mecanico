@@ -10,26 +10,19 @@ use Illuminate\Support\Facades\Hash;
 
 class ClienteController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $clientes = Cliente::all();
         return response()->json($clientes);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {
         // Comprueba si se proporciona un campo 'password' en la solicitud
@@ -44,7 +37,7 @@ class ClienteController extends Controller
         $usuario = Usuario::create([
             'email' => $request->email,
             'password' => $password,
-            'rol_id' => Rol::where('nombre', 'Cliente')->first(),
+            'rol_id' => Rol::where('nombre', 'Cliente')->pluck('id')->first(),
         ]);
 
         // Verificar que el usuario se haya creado correctamente
@@ -73,9 +66,7 @@ class ClienteController extends Controller
         ], 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show(string $id)
     {
         // Encuentra el cliente por su ID con su usuario asociado
@@ -90,17 +81,13 @@ class ClienteController extends Controller
         return response()->json($cliente);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit(string $id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(Request $request, string $id)
     {
         // Encuentra el cliente por su CI
@@ -121,9 +108,9 @@ class ClienteController extends Controller
         $cliente->save();
 
         // Actualiza el correo electrónico del usuario asociado (si ha cambiado)
-        if ($cliente->user->email !== $request->email) {
-            $cliente->user->email = $request->email;
-            $cliente->user->save();
+        if ($cliente->usuario->email !== $request->email) {
+            $cliente->usuario->email = $request->email;
+            $cliente->usuario->save();
         }
 
         // Devuelve una respuesta exitosa
@@ -135,9 +122,7 @@ class ClienteController extends Controller
         return response()->json($data);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(string $id)
     {
          // Encuentra el cliente por su ID
@@ -152,7 +137,7 @@ class ClienteController extends Controller
          $cliente->delete();
 
          // Encuentra el usuario asociado al cliente
-         $usuario = $cliente->user;
+         $usuario = $cliente->usuario;
 
          if ($usuario) {
              // Elimina el usuario

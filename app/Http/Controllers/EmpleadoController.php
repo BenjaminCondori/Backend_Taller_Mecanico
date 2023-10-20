@@ -9,26 +9,19 @@ use Illuminate\Support\Facades\Hash;
 
 class EmpleadoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $empleados = Empleado::all();
         return response()->json($empleados);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
        //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {
          // Crea el usuario con la contraseña determinada
@@ -65,9 +58,7 @@ class EmpleadoController extends Controller
         ], 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show(string $id)
     {
         // Encuentra el empleado por su ID con su usuario asociado
@@ -82,17 +73,13 @@ class EmpleadoController extends Controller
         return response()->json($empleado);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit(string $id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(Request $request, string $id)
     {
         // Encuentra el empleado por su ID
@@ -114,9 +101,9 @@ class EmpleadoController extends Controller
         $empleado->save();
 
         // Actualiza el correo electrónico del usuario asociado (si ha cambiado)
-        $empleado->user->email = $request->email;
-        $empleado->user->rol_id = $request->rol_id;
-        $empleado->user->save();
+        $empleado->usuario->email = $request->email;
+        $empleado->usuario->rol_id = $request->rol_id;
+        $empleado->usuario->save();
 
         // Devuelve una respuesta exitosa
         $data = [
@@ -127,9 +114,7 @@ class EmpleadoController extends Controller
         return response()->json($data);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(string $id)
     {
         // Encuentra el empleado por su ID
@@ -144,7 +129,7 @@ class EmpleadoController extends Controller
         $empleado->delete();
 
         // Encuentra el usuario asociado al empleado
-        $usuario = $empleado->user;
+        $usuario = $empleado->usuario;
 
         if ($usuario) {
             // Elimina el usuario
