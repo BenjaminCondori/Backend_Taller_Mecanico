@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             EmpleadoSeeder::class,
             MarcaSeeder::class,
             ModeloSeeder::class,
+            TipoVehiculoSeeder::class,
             VehiculoSeeder::class,
         ]);
     }

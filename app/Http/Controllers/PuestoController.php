@@ -58,7 +58,10 @@ class PuestoController extends Controller
         $puesto = Puesto::find($id);
 
         if (!$puesto) {
-            return response()->json(['error' => 'No se encontró el puesto'], 404);
+            return response()->json([
+                'status' => false,
+                'error' => 'No se encontró el puesto',
+            ], 404);
         }
 
         $puesto->update([
@@ -79,7 +82,17 @@ class PuestoController extends Controller
         $puesto = Puesto::find($id);
 
         if (!$puesto) {
-            return response()->json(['error' => 'No se encontró el puesto'], 404);
+            return response()->json([
+                'status' => false,
+                'error' => 'No se encontró el puesto',
+            ], 404);
+        }
+
+        if (!$puesto->empleados->isEmpty()) {
+            return response()->json([
+                'status' => false,
+                'error' => 'Ocurrió un error al eliminar el puesto',
+            ], 500);
         }
 
         $puesto->delete();

@@ -39,7 +39,10 @@ class MarcaController extends Controller
         $marca = Marca::find($id);
 
         if (!$marca) {
-            return response()->json(['error' => 'No se encontró la marca'], 404);
+            return response()->json([
+                'status' => false,
+                'error' => 'No se encontró la marca',
+            ], 404);
         }
 
         return response()->json($marca);

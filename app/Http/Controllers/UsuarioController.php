@@ -2,63 +2,111 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Usuario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UsuarioController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $usuarios = Usuario::all();
+        return response()->json($usuarios);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {
-        //
+        $usuario = Usuario::create([
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'rol_id' => $request->rol_id,
+        ]);
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Usuario creado satisfactoriamente',
+            'usuario' => $usuario
+        ], 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show(string $id)
     {
-        //
+        $usuario = Usuario::find($id);
+
+        if (!$usuario) {
+            return response()->json([
+                'status' => false,
+                'error' => 'No se encontró el usuario
+            '], 404);
+        }
+
+        return response()->json($usuario);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit(string $id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(Request $request, string $id)
     {
-        //
+        $usuario = Usuario::find($id);
+
+        if (!$usuario) {
+            return response()->json([
+                'status' => false,
+                'error' => 'No se encontró el usuario'
+            ], 404);
+        }
+
+        $usuario->update([
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'rol_id' => $request->rol_id,
+        ]);
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Usuario actualizado satisfactoriamente',
+            'usuario' => $usuario
+        ], 200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(string $id)
     {
-        //
+        $usuario = Usuario::find($id);
+
+        if (!$usuario) {
+            return response()->json([
+                'status' => false,
+                'error' => 'No se encontró el usuario'
+            ], 404);
+        }
+
+        if (!$usuario->empleado || !$usuario->cliente) {
+            return response()->json([
+                'status' => false,
+                'error' => 'No se puede eliminar el usuario porque tiene un empleado o cliente asociado'
+            ], 500);
+        }
+
+        $usuario->delete();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Usuario eliminado satisfactoriamente',
+            'usuario' => $usuario,
+        ], 200);
     }
 }
