@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Producto extends Model
 {
@@ -19,7 +20,6 @@ class Producto extends Model
         'unidad_medida',
         'imagen',
         'categoria_id',
-        'servicio_id',
         'inventario_id',
         'proveedor_id',
     ];
@@ -28,8 +28,8 @@ class Producto extends Model
         return $this->belongsTo(Categoria::class, 'categoria_id');
     }
 
-    public function servicio(): BelongsTo {
-        return $this->belongsTo(Servicio::class, 'servicio_id');
+    public function cotizaciones(): BelongsToMany {
+        return $this->belongsToMany(Cotizacion::class, 'cotizacion_producto', 'producto_id', 'cotizacion_id');
     }
 
     public function proveedor(): BelongsTo {

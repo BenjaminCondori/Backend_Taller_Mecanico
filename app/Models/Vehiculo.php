@@ -48,4 +48,8 @@ class Vehiculo extends Model
         return $this->hasMany(Diagnostico::class, 'vehiculo_id');
     }
 
+    public function cotizaciones(): HasMany {
+        return $this->hasMany(Cotizacion::class, 'vehiculo_id');
+    }
+
 }

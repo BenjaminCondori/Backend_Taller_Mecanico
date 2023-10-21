@@ -18,6 +18,8 @@ return new class extends Migration
             $table->decimal('precio', 10, 2);
             $table->unsignedBigInteger('cliente_id');
             $table->foreign('cliente_id')->references('id')->on('clientes');
+            $table->unsignedBigInteger('vehiculo_id');
+            $table->foreign('vehiculo_id')->references('id')->on('vehiculos');
             $table->timestamps();
         });
     }
