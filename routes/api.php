@@ -12,6 +12,7 @@ use App\Http\Controllers\PuestoController;
 use App\Http\Controllers\TipoVehiculoController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\VehiculoController;
+use App\Http\Controllers\DiagnosticoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -85,6 +86,12 @@ Route::post('/tipo-vehiculos', [TipoVehiculoController::class, 'store']);
 Route::get('/tipo-vehiculos/{id}', [TipoVehiculoController::class, 'show']);
 Route::put('/tipo-vehiculos/{id}', [TipoVehiculoController::class, 'update']);
 Route::delete('/tipo-vehiculos/{id}', [TipoVehiculoController::class, 'destroy']);
+
+Route::get('/diagnosticos', [DiagnosticoController::class, 'index']);
+Route::post('/diagnosticos', [DiagnosticoController::class, 'store']);
+Route::get('/diagnosticos/{id}', [DiagnosticoController::class, 'show']);
+Route::put('/diagnosticos/{id}', [DiagnosticoController::class, 'update']);
+Route::delete('/diagnosticos/{id}', [DiagnosticoController::class, 'destroy']);
 
 Route::get('/proveedores', [ProveedorController::class, 'index']);
 Route::post('/proveedores', [ProveedorController::class, 'store']);

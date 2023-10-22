@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             ModeloSeeder::class,
             TipoVehiculoSeeder::class,
             VehiculoSeeder::class,
+            DiagnosticoSeeder::class,
         ]);
     }
 }
