@@ -27,6 +27,10 @@ class ModeloController extends Controller
             'marca_id' => $request->marca_id,
         ]);
 
+        // bitacora
+        $descripcion = 'Se creó un nuevo modelo con ID: '.$modelo->id;
+        registrarBitacora($descripcion);
+
         return response()->json([
             'status' => true,
             'message' => 'Modelo creado satisfactoriamente',
@@ -68,6 +72,10 @@ class ModeloController extends Controller
             'marca_id' => $request->marca_id,
         ]);
 
+        // bitacora
+        $descripcion = 'Se actualizo un modelo con ID: '.$modelo->id;
+        registrarBitacora($descripcion);
+
         return response()->json([
             'status' => true,
             'message' => 'Modelo actualizado satisfactoriamente',
@@ -88,6 +96,10 @@ class ModeloController extends Controller
         }
 
         $modelo->delete();
+
+        // bitacora
+        $descripcion = 'Se elimino un modelo con ID: '.$modelo->id;
+        registrarBitacora($descripcion);
 
         return response()->json([
             'status' => true,

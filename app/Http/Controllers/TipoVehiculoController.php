@@ -24,6 +24,10 @@ class TipoVehiculoController extends Controller
     {
         $tipoVehiculo = TipoVehiculo::create($request->all());
 
+        // bitacora
+        $descripcion = 'Se creó un nuevo tipo de vehiculo con ID: '.$tipoVehiculo->id;
+        registrarBitacora($descripcion);
+
         return response()->json([
             'status' => true,
             'message' => 'Tipo de vehiculo creada satisfactoriamente',
@@ -66,6 +70,10 @@ class TipoVehiculoController extends Controller
 
         $tipoVehiculo->update($request->all());
 
+        // bitacora
+        $descripcion = 'Se actualizo un tipo de vehiculo con ID: '.$tipoVehiculo->id;
+        registrarBitacora($descripcion);
+
         return response()->json([
             'status' => true,
             'message' => 'Tipo de vehiculo actualizada satisfactoriamente',
@@ -86,6 +94,10 @@ class TipoVehiculoController extends Controller
         }
 
         $tipoVehiculo->delete();
+
+        // bitacora
+        $descripcion = 'Se elimino un tipo de vehiculo con ID: '.$tipoVehiculo->id;
+        registrarBitacora($descripcion);
 
         return response()->json([
             'status' => true,

@@ -13,6 +13,7 @@ use App\Http\Controllers\TipoVehiculoController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\VehiculoController;
 use App\Http\Controllers\DiagnosticoController;
+use App\Http\Controllers\BitacoraController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -123,5 +124,5 @@ Route::get('/inventarios/{id}', [InventarioController::class, 'show']);
 Route::put('/inventarios/{id}', [InventarioController::class, 'update']);
 Route::delete('/inventarios/{id}', [InventarioController::class, 'destroy']);
 
-
+Route::get('/biracoras', [BitacoraController::class, 'index']);
 
