@@ -26,6 +26,10 @@ class MarcaController extends Controller
             'nombre' => $request->nombre,
         ]);
 
+        // bitacora
+        $descripcion = 'Se creó una nueva marca con ID: '.$marca->id;
+        registrarBitacora($descripcion);
+
         return response()->json([
             'status' => true,
             'message' => 'Marca creada satisfactoriamente',
@@ -66,6 +70,10 @@ class MarcaController extends Controller
         $marca->nombre = $request->nombre;
         $marca->save();
 
+        // bitacora
+        $descripcion = 'Se actualizo una marca con ID: '.$marca->id;
+        registrarBitacora($descripcion);
+
         return response()->json([
             'status' => true,
             'message' => 'Marca actualizada satisfactoriamente',
@@ -83,6 +91,10 @@ class MarcaController extends Controller
         }
 
         $marca->delete();
+
+        // bitacora
+        $descripcion = 'Se elimino una marca con ID: '.$marca->id;
+        registrarBitacora($descripcion);
 
         return response()->json([
             'status' => true,

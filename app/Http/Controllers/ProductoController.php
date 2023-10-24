@@ -24,6 +24,10 @@ class ProductoController extends Controller
     {
         $producto = Producto::create($request->all());
 
+        // bitacora
+        $descripcion = 'Se creó un nuevo producto con ID: '.$producto->id;
+        registrarBitacora($descripcion);
+
         return response()->json([
             'status' => true,
             'message' => 'Producto creado satisfactoriamente',
@@ -66,6 +70,10 @@ class ProductoController extends Controller
 
         $producto->update($request->all());
 
+        // bitacora
+        $descripcion = 'Se actualizo un producto con ID: '.$producto->id;
+        registrarBitacora($descripcion);
+
         return response()->json([
             'status' => true,
             'message' => 'Producto actualizado satisfactoriamente',
@@ -86,6 +94,10 @@ class ProductoController extends Controller
         }
 
         $producto->delete();
+
+        // bitacora
+        $descripcion = 'Se elimino el producto con ID: '.$producto->id;
+        registrarBitacora($descripcion);
 
         return response()->json([
             'status' => true,

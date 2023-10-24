@@ -24,6 +24,10 @@ class InventarioController extends Controller
     {
         $inventario = Inventario::create($request->all());
 
+        // bitacora
+        $descripcion = 'Se creó un nuevo inventario con ID: '.$inventario->id;
+        registrarBitacora($descripcion);
+
         return response()->json([
             'status' => true,
             'message' => 'Inventario creado satisfactoriamente',
@@ -66,6 +70,10 @@ class InventarioController extends Controller
 
         $inventario->update($request->all());
 
+        // bitacora
+        $descripcion = 'Se actualizo un inventario con ID: '.$inventario->id;
+        registrarBitacora($descripcion);
+
         return response()->json([
             'status' => true,
             'message' => 'Inventario actualizado satisfactoriamente',
@@ -86,6 +94,10 @@ class InventarioController extends Controller
         }
 
         $inventario->delete();
+
+        // bitacora
+        $descripcion = 'Se elimino un inventario con ID: '.$inventario->id;
+        registrarBitacora($descripcion);
 
         return response()->json([
             'status' => true,

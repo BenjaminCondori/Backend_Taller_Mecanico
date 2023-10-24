@@ -36,6 +36,10 @@ class EmpleadoController extends Controller
             return response()->json(['error' => 'Error al crear al usuario'], 404);
         }
 
+        // bitacora
+        $descripcion = 'Se creó un nuevo usuario con ID: '.$usuario->id;
+        registrarBitacora($descripcion);
+
         // Crear un nuevo cliente relacionado con el usuario
         $empleado = new Empleado([
             'ci' => $request->ci,
@@ -46,6 +50,10 @@ class EmpleadoController extends Controller
             'genero' => $request->genero,
             'puesto_id' => $request->puesto_id,
         ]);
+
+        // bitacora
+        $descripcion = 'Se creó un nuevo empleado con ID: '.$empleado->id;
+        registrarBitacora($descripcion);
 
         // Asociar el cliente con el usuario
         $usuario->empleado()->save($empleado);
@@ -99,6 +107,10 @@ class EmpleadoController extends Controller
         $empleado->direccion = $request->direccion;
         $empleado->puesto_id = $request->puesto_id;
         $empleado->save();
+
+        // bitacora
+        $descripcion = 'Se actualizo un empleado con ID: '.$empleado->id;
+        registrarBitacora($descripcion);
 
         // Actualiza el correo electrónico del usuario asociado (si ha cambiado)
         $empleado->usuario->email = $request->email;
