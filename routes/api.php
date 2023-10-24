@@ -14,6 +14,7 @@ use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\VehiculoController;
 use App\Http\Controllers\DiagnosticoController;
 use App\Http\Controllers\BitacoraController;
+use App\Http\Controllers\CotizacionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -126,3 +127,8 @@ Route::delete('/inventarios/{id}', [InventarioController::class, 'destroy']);
 
 Route::get('/biracoras', [BitacoraController::class, 'index']);
 
+Route::get('/cotizaciones', [CotizacionController::class, 'index']);
+Route::post('/cotizaciones', [CotizacionController::class, 'store']);
+Route::get('/cotizaciones/{id}', [CotizacionController::class, 'show']);
+//Route::put('/cotizaciones/{id}', [CotizacionController::class, 'update']);
+Route::delete('/cotizaciones/{id}', [CotizacionController::class, 'destroy']);

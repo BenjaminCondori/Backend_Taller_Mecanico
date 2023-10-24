@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('cotizacion_servicio', function (Blueprint $table) {
             $table->id();
+            $table->integer('servicio_cantidad');
+            $table->decimal('servicio_preciototal', 10, 2);
             $table->unsignedBigInteger('cotizacion_id');
             $table->foreign('cotizacion_id')->references('id')->on('cotizaciones');
             $table->unsignedBigInteger('servicio_id');
