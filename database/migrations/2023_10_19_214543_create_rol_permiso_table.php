@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('rol_id');
             $table->foreign('rol_id')->references('id')->on('roles');
             $table->unsignedBigInteger('permiso_id');
-            $table->foreign('permiso_id')->references('id')->on('permisos');
+            $table->foreign('permiso_id')->references('id')->on('permisos')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

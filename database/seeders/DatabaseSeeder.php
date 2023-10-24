@@ -24,6 +24,11 @@ class DatabaseSeeder extends Seeder
             ModeloSeeder::class,
             TipoVehiculoSeeder::class,
             VehiculoSeeder::class,
+            ProveedorSeeder::class,
+            CategoriaSeeder::class,
+            InventarioSeeder::class,
+            ServicioSeeder::class,
+            ProductoSeeder::class,
         ]);
     }
 }

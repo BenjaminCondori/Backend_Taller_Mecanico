@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('cotizacion_producto', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('cotizacion_id');
-            $table->foreign('cotizacion_id')->references('id')->on('cotizaciones');
+            $table->foreign('cotizacion_id')->references('id')->on('cotizaciones')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('producto_id');
-            $table->foreign('producto_id')->references('id')->on('productos');
+            $table->foreign('producto_id')->references('id')->on('productos')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
