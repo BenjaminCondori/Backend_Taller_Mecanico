@@ -125,7 +125,7 @@ class ClienteController extends Controller
             $cliente->usuario->save();
 
             // bitacora
-            $descripcion = 'Se actualizo el correo de un usuario con ID: '.$usuario->id;
+            $descripcion = 'Se actualizo el correo de un usuario con ID: '.$cliente->usuario->id;
             registrarBitacora($descripcion);
         }
 

@@ -24,15 +24,12 @@ class DatabaseSeeder extends Seeder
             ModeloSeeder::class,
             TipoVehiculoSeeder::class,
             VehiculoSeeder::class,
-<<<<<<< HEAD
             ProveedorSeeder::class,
             CategoriaSeeder::class,
             InventarioSeeder::class,
             ServicioSeeder::class,
             ProductoSeeder::class,
-=======
             DiagnosticoSeeder::class,
->>>>>>> tipovehiculo
         ]);
     }
 }
