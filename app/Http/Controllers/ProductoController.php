@@ -9,7 +9,8 @@ class ProductoController extends Controller
 {
     public function index()
     {
-        $productos = Producto::all();
+        // $productos = Producto::all();
+        $productos = Producto::with('inventario', 'proveedor', 'categoria')->get();
         return response()->json($productos);
     }
 
@@ -38,7 +39,8 @@ class ProductoController extends Controller
 
     public function show(string $id)
     {
-        $producto = Producto::find($id);
+        // $producto = Producto::find($id);
+        $producto = Producto::with('inventario')->find($id);
 
         if (!$producto) {
             return response()->json([

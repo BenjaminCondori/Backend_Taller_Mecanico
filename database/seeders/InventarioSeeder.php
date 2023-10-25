@@ -21,8 +21,6 @@ class InventarioSeeder extends Seeder
             Inventario::create([
                 'stock_disponible' => rand(1, 100),
                 'stock_minimo' => rand(1, 20),
-                'precio_compra' => number_format(rand(500, 5000) / 100, 2),
-                'precio_venta' => number_format(rand(1000, 10000) / 100, 2),
             ]);
         }
     }

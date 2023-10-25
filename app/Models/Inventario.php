@@ -16,8 +16,6 @@ class Inventario extends Model
     protected $fillable = [
         'stock_disponible',
         'stock_minimo',
-        'precio_compra',
-        'precio_venta',
     ];
 
     public function producto(): HasOne {
