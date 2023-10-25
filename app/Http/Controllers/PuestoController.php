@@ -27,6 +27,10 @@ class PuestoController extends Controller
             'descripcion' => $request->descripcion,
         ]);
 
+        // bitacora
+        $descripcion = 'Se creó un nuevo puesto con ID: '.$puesto->id;
+        registrarBitacora($descripcion);
+
         return response()->json([
             'status' => true,
             'message' => 'Puesto creado satisfactoriamente',
@@ -69,6 +73,10 @@ class PuestoController extends Controller
             'descripcion' => $request->descripcion,
         ]);
 
+        // bitacora
+        $descripcion = 'Se actualizo un puesto con ID: '.$puesto->id;
+        registrarBitacora($descripcion);
+
         return response()->json([
             'status' => true,
             'message' => 'Puesto actualizado satisfactoriamente',
@@ -96,6 +104,10 @@ class PuestoController extends Controller
         }
 
         $puesto->delete();
+
+        // bitacora
+        $descripcion = 'Se elimino el puesto con ID: '.$puesto->id;
+        registrarBitacora($descripcion);
 
         return response()->json([
             'status' => true,

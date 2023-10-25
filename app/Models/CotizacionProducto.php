@@ -12,6 +12,8 @@ class CotizacionProducto extends Model
     protected $table = 'cotizacion_producto';
 
     protected $fillable = [
+        'producto_cantidad',
+        'producto_preciototal',
         'cotizacion_id',
         'producto_id',
     ];

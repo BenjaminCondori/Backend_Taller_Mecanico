@@ -13,6 +13,9 @@ use App\Http\Controllers\PuestoController;
 use App\Http\Controllers\TipoVehiculoController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\VehiculoController;
+use App\Http\Controllers\DiagnosticoController;
+use App\Http\Controllers\BitacoraController;
+use App\Http\Controllers\CotizacionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -97,28 +100,46 @@ Route::post("/login", [JWTController::class, "login"]);
     Route::put('/proveedores/{id}', [ProveedorController::class, 'update']);
     Route::delete('/proveedores/{id}', [ProveedorController::class, 'destroy']);
 
-    Route::get('/categorias', [CategoriaController::class, 'index']);
-    Route::post('/categorias', [CategoriaController::class, 'store']);
-    Route::get('/categorias/{id}', [CategoriaController::class, 'show']);
-    Route::put('/categorias/{id}', [CategoriaController::class, 'update']);
-    Route::delete('/categorias/{id}', [CategoriaController::class, 'destroy']);
+Route::get('/diagnosticos', [DiagnosticoController::class, 'index']);
+Route::post('/diagnosticos', [DiagnosticoController::class, 'store']);
+Route::get('/diagnosticos/{id}', [DiagnosticoController::class, 'show']);
+Route::put('/diagnosticos/{id}', [DiagnosticoController::class, 'update']);
+Route::delete('/diagnosticos/{id}', [DiagnosticoController::class, 'destroy']);
 
-    Route::get('/servicios', [ServicioController::class, 'index']);
-    Route::post('/servicios', [ServicioController::class, 'store']);
-    Route::get('/servicios/{id}', [ServicioController::class, 'show']);
-    Route::put('/servicios/{id}', [ServicioController::class, 'update']);
-    Route::delete('/servicios/{id}', [ServicioController::class, 'destroy']);
+Route::get('/proveedores', [ProveedorController::class, 'index']);
+Route::post('/proveedores', [ProveedorController::class, 'store']);
+Route::get('/proveedores/{id}', [ProveedorController::class, 'show']);
+Route::put('/proveedores/{id}', [ProveedorController::class, 'update']);
+Route::delete('/proveedores/{id}', [ProveedorController::class, 'destroy']);
 
-    Route::get('/productos', [ProductoController::class, 'index']);
-    Route::post('/productos', [ProductoController::class, 'store']);
-    Route::get('/productos/{id}', [ProductoController::class, 'show']);
-    Route::put('/productos/{id}', [ProductoController::class, 'update']);
-    Route::delete('/productos/{id}', [ProductoController::class, 'destroy']);
+Route::get('/categorias', [CategoriaController::class, 'index']);
+Route::post('/categorias', [CategoriaController::class, 'store']);
+Route::get('/categorias/{id}', [CategoriaController::class, 'show']);
+Route::put('/categorias/{id}', [CategoriaController::class, 'update']);
+Route::delete('/categorias/{id}', [CategoriaController::class, 'destroy']);
 
-    Route::get('/inventarios', [InventarioController::class, 'index']);
-    Route::post('/inventarios', [InventarioController::class, 'store']);
-    Route::get('/inventarios/{id}', [InventarioController::class, 'show']);
-    Route::put('/inventarios/{id}', [InventarioController::class, 'update']);
-    Route::delete('/inventarios/{id}', [InventarioController::class, 'destroy']);
+Route::get('/servicios', [ServicioController::class, 'index']);
+Route::post('/servicios', [ServicioController::class, 'store']);
+Route::get('/servicios/{id}', [ServicioController::class, 'show']);
+Route::put('/servicios/{id}', [ServicioController::class, 'update']);
+Route::delete('/servicios/{id}', [ServicioController::class, 'destroy']);
 
-// });
+Route::get('/productos', [ProductoController::class, 'index']);
+Route::post('/productos', [ProductoController::class, 'store']);
+Route::get('/productos/{id}', [ProductoController::class, 'show']);
+Route::put('/productos/{id}', [ProductoController::class, 'update']);
+Route::delete('/productos/{id}', [ProductoController::class, 'destroy']);
+
+Route::get('/inventarios', [InventarioController::class, 'index']);
+Route::post('/inventarios', [InventarioController::class, 'store']);
+Route::get('/inventarios/{id}', [InventarioController::class, 'show']);
+Route::put('/inventarios/{id}', [InventarioController::class, 'update']);
+Route::delete('/inventarios/{id}', [InventarioController::class, 'destroy']);
+
+Route::get('/bitacoras', [BitacoraController::class, 'index']);
+
+Route::get('/cotizaciones', [CotizacionController::class, 'index']);
+Route::post('/cotizaciones', [CotizacionController::class, 'store']);
+Route::get('/cotizaciones/{id}', [CotizacionController::class, 'show']);
+//Route::put('/cotizaciones/{id}', [CotizacionController::class, 'update']);
+Route::delete('/cotizaciones/{id}', [CotizacionController::class, 'destroy']);

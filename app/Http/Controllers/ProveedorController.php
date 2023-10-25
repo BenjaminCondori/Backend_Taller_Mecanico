@@ -24,6 +24,10 @@ class ProveedorController extends Controller
     {
         $proveedor = Proveedor::create($request->all());
 
+        // bitacora
+        $descripcion = 'Se creó un nuevo proveedor con ID: '.$proveedor->id;
+        registrarBitacora($descripcion);
+
         return response()->json([
             'status' => true,
             'message' => 'Proveedor creado satisfactoriamente',
@@ -66,6 +70,10 @@ class ProveedorController extends Controller
 
         $proveedor->update($request->all());
 
+        // bitacora
+        $descripcion = 'Se actualizo un proveedor con ID: '.$proveedor->id;
+        registrarBitacora($descripcion);
+
         return response()->json([
             'status' => true,
             'message' => 'Proveedor actualizado satisfactoriamente',
@@ -86,6 +94,10 @@ class ProveedorController extends Controller
         }
 
         $proveedor->delete();
+
+        // bitacora
+        $descripcion = 'Se elimino el proveedor con ID: '.$proveedor->id;
+        registrarBitacora($descripcion);
 
         return response()->json([
             'status' => true,
