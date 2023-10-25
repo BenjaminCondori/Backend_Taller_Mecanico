@@ -31,11 +31,11 @@ function precioTotalCotizacion(Request $request){
 
     $productos = $request->productos;
     foreach($productos as $item)
-        $sumaTotal = $sumaTotal + ((decimal)[$item['producto_cantidad']]*(decimal) [$item['precio']]);
+        $sumaTotal = $sumaTotal + ((float)[$item['producto_cantidad']]*(float) [$item['precio']]);
 
     $servicios = $request->servicios;
     foreach($servicios as $item)
-        $sumaTotal =$sumaTotal + ((decimal) [$item['servicio_cantidad']]* (decimal) [$item['precio']]);
+        $sumaTotal =$sumaTotal + ((float) [$item['servicio_cantidad']]* (float) [$item['precio']]);
 
     return $sumaTotal;
 }

@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('productos', function (Blueprint $table) {
             $table->id();
             $table->string('nombre')->unique();
-            $table->text('descripcion');
-            $table->decimal('precio', 10, 2);
-            $table->string('unidad_medida');
-            $table->string('imagen');
+            $table->text('descripcion')->nullable();
+            $table->decimal('precio_venta', 10, 2);
+            $table->decimal('precio_compra', 10, 2);
+            $table->string('unidad_medida')->nullable();
+            $table->string('imagen')->nullable();
             $table->unsignedBigInteger('categoria_id');
             $table->foreign('categoria_id')->references('id')->on('categorias')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('proveedor_id');
