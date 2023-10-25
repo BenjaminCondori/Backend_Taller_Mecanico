@@ -130,7 +130,10 @@ class ClienteController extends Controller
 
          if (!$cliente) {
              // Si no se encuentra el cliente, devuelve una respuesta de error
-             return response()->json(['error' => 'Cliente no encontrado'], 404);
+             return response()->json([
+                'status' => false,
+                'error' => 'Cliente no encontrado'
+            ], 404);
          }
 
          // Elimina el cliente
