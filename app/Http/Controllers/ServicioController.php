@@ -26,7 +26,7 @@ class ServicioController extends Controller
 
         // bitacora
         $descripcion = 'Se creó un nuevo servicio con ID: '.$servicio->id;
-        registrarBitacora($descripcion);
+        //registrarBitacora($descripcion);
 
         return response()->json([
             'status' => true,
@@ -72,7 +72,7 @@ class ServicioController extends Controller
 
         // bitacora
         $descripcion = 'Se actualizo un servicio con ID: '.$servicio->id;
-        registrarBitacora($descripcion);
+        //registrarBitacora($descripcion);
 
         return response()->json([
             'status' => true,
@@ -97,7 +97,7 @@ class ServicioController extends Controller
 
         // bitacora
         $descripcion = 'Se elimino el servicio con ID: '.$servicio->id;
-        registrarBitacora($descripcion);
+        //registrarBitacora($descripcion);
 
         return response()->json([
             'status' => true,

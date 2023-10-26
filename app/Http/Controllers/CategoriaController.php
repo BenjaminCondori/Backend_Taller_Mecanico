@@ -26,7 +26,7 @@ class CategoriaController extends Controller
 
         // bitacora
         $descripcion = 'Se creó una nueva categoria con ID: '.$categoria->id;
-        registrarBitacora($descripcion);
+        //registrarBitacora($descripcion);
 
         return response()->json([
             'status' => true,
