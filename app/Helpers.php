@@ -2,27 +2,55 @@
 
 
 use App\Models\Bitacora;
+use App\Models\Cliente;
+use App\Models\Empleado;
+use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
-function registrarBitacora($descripcion) {
+function registrarBitacora(Request $request, string $descripcion) {
 
-    // $usuario = Auth::user();
-    // dd($usuario);
+    $usuario = Auth::user();
+
+    $nombre_usuario = nombreUsuario($usuario->id);
+
+    // optenemos la ip de usuario
+    $ip = $request->ip();
+    // vemos si la ip es real y no esta usando un proxy
+    if (getenv('HTTP_CLIENT_IP')){
+        $ip = getenv('HTTP_CLIENT_IP');
+    } elseif (getenv('HTTP_X_FORWARDED_FOR')){
+        $ip = getenv('HTTP_X_FORWARDED_FOR');
+    } elseif (getenv('HTTP_X_FORWARDED')){
+        $ip = getenv('HTTP_X_FORWARDED');
+    } elseif (getenv('HTTP_FORWARDED_FOR')){
+        $ip = getenv('HTTP_FORWARDED_FOR');
+    }elseif (getenc('HTTP_FORWARDED')){
+        $ip = getenv('HTTP_FORWARDED');
+    } else {
+        $ip = $_SERVER['REMOTE_ADDR'];
+    }
+
     Bitacora::create([
-        'id_usuario' => 1,
+        'id_usuario' => $usuario->id,
+        'usuario' => $nombre_usuario,
+        'ip_usuario' => (string) [$ip],
         'descripcion' => $descripcion,
     ]);
 
-    // $roles = ['Mecanico', 'Cliente'];
+}
 
-    // if ($usuario && !in_array($usuario->rol->nombre, $roles) {
-    //     Bitacora::create([
-    //         'id_usuario' => $usuario->empleado->id,
-    //         'descripcion' => $descripcion,
-    //     ]);
-    // }
+function nombreUsuario($id){
+    $cliente = CLiente::where('usuario_id', $id)->first();
+    if ($cliente){ // verificamos si existe el cliente
+        return $cliente->nombre .' ' .$cliente->apeliido;
+    }
 
+    $empleado = Empleado::where('usuario_id', $id)->first();
+    if ($empleado){ // verificamos si exite el empleado
+        return $empleado->nombre .' ' .$empleado->apeliido;
+    }
+    return 'no se encontro el usuario';
 }
 
 function precioTotalCotizacion(Request $request){
