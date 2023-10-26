@@ -12,7 +12,7 @@ class ProductoController extends Controller
     public function index()
     {
         // $productos = Producto::all();
-        $productos = Producto::with('inventario', 'proveedor', 'categoria')->get();
+        $productos = Producto::with('proveedor', 'categoria')->get();
         return response()->json($productos);
     }
 
@@ -25,46 +25,50 @@ class ProductoController extends Controller
 
     public function store(Request $request)
     {
-        if ($request->hasFile('picture')) {
-            $file = $request->file('picture');
-            $image_name = time().'_'.$file->getClientOriginalName();
-            $image_name = Str::slug($image_name).".".$file->guessExtension();
-            $file->move(public_path("/image"), $image_name);
-        }
+        // $image_name = null;
+        // if ($request->hasFile('picture')) {
+        //     $file = $request->file('picture');
+        //     $image_name = time().'_'.$file->getClientOriginalName();
+        //     $image_name = Str::slug($image_name).".".$file->guessExtension();
+        //     $file->move(public_path("/image"), $image_name);
+        // }
 
-        $inventario = Inventario::create([
-            'stock_disponible' => $request->stock_disponible,
-            'stock_minimo' => $request->stock_minimo,
-        ]);
+        // $inventario = Inventario::create([
+        //     'stock_disponible' => $request->stock_disponible,
+        //     'stock_minimo' => $request->stock_minimo,
+        // ]);
 
-        $producto = Producto::create([
-            'nombre' => $request->nombre,
-            'descripcion' => $request->descripcion,
-            'precio_venta' => $request->precio_venta,
-            'precio_compra' => $request->precio_compra,
-            'categoria_id' => $request->categoria_id,
-            'proveedor_id' => $request->proveedor_id,
-            'inventario_id' => $inventario->id,
-            'imagen' => $image_name,
-        ]);
+        $producto = Producto::create($request->all());
+        // $producto->update(['inventario_id' => $inventario->id]);
+
+        // $producto = Producto::create([
+        //     'nombre' => $request->nombre,
+        //     'descripcion' => $request->descripcion,
+        //     'precio_venta' => $request->precio_venta,
+        //     'precio_compra' => $request->precio_compra,
+        //     'categoria_id' => $request->categoria_id,
+        //     'proveedor_id' => $request->proveedor_id,
+        //     'unidad_medida' => 'Unidades',
+        //     'inventario_id' => $inventario->id,
+        //     'imagen' => $request->picture,
+        // ]);
 
         // bitacora
-        // $descripcion = 'Se creó un nuevo producto con ID: '.$producto->id;
-        // registrarBitacora($descripcion);
+        $descripcion = 'Se creó un nuevo producto con ID: '.$producto->id;
+        registrarBitacora($descripcion);
 
         return response()->json([
             'status' => true,
             'message' => 'Producto creado satisfactoriamente',
             'producto' => $producto,
-            'inventario' => $inventario,
+            // 'inventario' => $inventario,
         ], 201);
     }
 
 
     public function show(string $id)
     {
-        // $producto = Producto::find($id);
-        $producto = Producto::with('inventario')->find($id);
+        $producto = Producto::find($id);
 
         if (!$producto) {
             return response()->json([
@@ -73,13 +77,7 @@ class ProductoController extends Controller
             ], 404);
         }
 
-        $imagenPath = public_path("/image") . '/' . $producto->imagen; // Construye la URL completa de la imagen
-
-        return response()->json([
-            'status' => true,
-            'producto' => $producto,
-            'imagen_url' => $imagenPath, // Devuelve la URL completa de la imagen
-        ], 200);
+        // $imagenPath = public_path("/image") . '/' . $producto->imagen;
 
         return response()->json($producto);
     }

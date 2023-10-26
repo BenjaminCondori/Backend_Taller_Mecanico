@@ -19,9 +19,11 @@ class Producto extends Model
         'precio_venta',
         'precio_compra',
         'unidad_medida',
+        'stock_disponible',
+        'stock_minimo',
         'imagen',
         'categoria_id',
-        'inventario_id',
+        // 'inventario_id',
         'proveedor_id',
     ];
 
@@ -37,8 +39,8 @@ class Producto extends Model
         return $this->belongsTo(Proveedor::class, 'proveedor_id');
     }
 
-    public function inventario(): BelongsTo {
-        return $this->belongsTo(Inventario::class, 'inventario_id');
-    }
+    // public function inventario(): BelongsTo {
+    //     return $this->belongsTo(Inventario::class, 'inventario_id');
+    // }
 
 }
