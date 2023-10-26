@@ -37,12 +37,12 @@ class CotizacionController extends Controller
             'descripcion' => $request->descripcion,
             'fecha' => Carbon::now(),
             'precio' => $request->precioTotal,
-            'cliente_id' => $request->cliente['id'],
-            'vehiculo_id' => $request->vehiculo['id'],
+            'cliente_id' => $request->cliente,
+            'vehiculo_id' => $request->vehiculo,
         ]);
 
         // se registra la tabla intermedia entre cotizacion y producto
-        $productos = $request->productos;
+     /*   $productos = $request->productos;
         foreach($productos as $item)
             CotizacionProducto::create([
                 'producto_cantidad' => $item['producto_cantidad'],
@@ -59,7 +59,7 @@ class CotizacionController extends Controller
                 'servicio_preciototal' => (decimal) [$item['servicio_cantidad']]* (decimal) [$item['precio']],
                 'cotizacion_id' => $cotizacion->id,
                 'servicio_id' => $item['id'],
-            ]);
+            ]);*/
 
         // bitacora
         $descripcion = 'Se creó una nueva cotizacion con ID: '.$cotizacion->id;
@@ -134,7 +134,21 @@ class CotizacionController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        // NO SE ACTUALIZARA UNA COTIZACION
+        $cotizacion = Cotizacion::find($request->id);
+
+        if (!$cotizacion) {
+            // Si no se encuentra el cliente, devuelve una respuesta de error
+            return response()->json(['error' => 'Cotizacion no encontrado'], 404);
+        }
+        $cotizacion->precio = $request->precioTotal;
+        $cotizacion->save();
+
+        $data = [
+            'status' => 'true',
+            'message' => 'Cotizacion actualizado satisfactoriamente',
+            'Cotizacion' => $cotizacion
+        ];
+        return response()->json($data);
     }
 
     /**
