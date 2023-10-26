@@ -68,11 +68,15 @@ class CategoriaController extends Controller
             ], 404);
         }
 
-        $categoria->update($request->all());
+        $categoria->nombre = $request->nombre;
+        if($request->has('categoria_id')){
+            $categoria->categoria_id = $request->categoria_id;
+        }
+        $categoria->save();
 
         // bitacora
         $descripcion = 'Se actualizo una categoria con ID: '.$categoria->id;
-        registrarBitacora($descripcion);
+       // registrarBitacora($descripcion);
 
         return response()->json([
             'status' => true,
@@ -103,7 +107,7 @@ class CategoriaController extends Controller
         $categoria->delete();
 
         $descripcion = 'Se elimino una categoria con ID: '.$categoria->id;
-        registrarBitacora($descripcion);
+        //registrarBitacora($descripcion);
 
         return response()->json([
             'status' => true,

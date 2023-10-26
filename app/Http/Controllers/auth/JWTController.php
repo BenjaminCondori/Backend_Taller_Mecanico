@@ -30,7 +30,7 @@ class JWTController extends Controller
                 'message' => 'Inicio sesión exitoso',
                 'token' => $token,
                 'usuario' => auth()->user(),
-            ]);
+            ], 200);
         }
 
         return response()->json([

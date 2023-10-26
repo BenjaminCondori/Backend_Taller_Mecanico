@@ -15,8 +15,6 @@ return new class extends Migration
             $table->id();
             $table->integer('stock_disponible');
             $table->integer('stock_minimo');
-            $table->decimal('precio_compra', 10, 2);
-            $table->decimal('precio_venta', 10, 2);
             $table->timestamps();
         });
     }

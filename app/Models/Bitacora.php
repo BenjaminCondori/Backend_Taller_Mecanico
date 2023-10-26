@@ -13,6 +13,8 @@ class Bitacora extends Model
 
     protected $fillable = [
         'id_usuario',
+        'usuario',
+        'ip_usuario',
         'descripcion',
     ];
 }

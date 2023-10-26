@@ -33,7 +33,7 @@ class DiagnosticoController extends Controller
 
         // bitacora
         $descripcion = 'Se creo un nuevo diagnostico con ID: '.$diagnostico->id;
-        registrarBitacora($descripcion);
+        registrarBitacora($request, $descripcion);
 
         return response()->json([
             'status' => true,
@@ -85,7 +85,7 @@ class DiagnosticoController extends Controller
 
         // bitacora
         $descripcion = 'Se actualizo el diagnostico con ID: '.$diagnostico->id;
-        registrarBitacora($descripcion);
+        registrarBitacora($request, $descripcion);
 
         return response()->json([
             'status' => true,
@@ -97,7 +97,7 @@ class DiagnosticoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request, string $id)
     {
         $diagnostico = Diagnostico::find($id);
 
@@ -112,7 +112,7 @@ class DiagnosticoController extends Controller
 
         // bitacora
         $descripcion = 'Se elimino el diagnostico con ID: '.$diagnostico->id;
-        registrarBitacora($descripcion);
+        registrarBitacora($request, $descripcion);
 
         return response()->json([
             'status' => true,

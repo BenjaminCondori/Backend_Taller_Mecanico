@@ -125,7 +125,7 @@ class ClienteController extends Controller
             $cliente->usuario->save();
 
             // bitacora
-            $descripcion = 'Se actualizo el correo de un usuario con ID: '.$usuario->id;
+            $descripcion = 'Se actualizo el correo de un usuario con ID: '.$cliente->usuario->id;
             registrarBitacora($descripcion);
         }
 
@@ -146,7 +146,10 @@ class ClienteController extends Controller
 
          if (!$cliente) {
              // Si no se encuentra el cliente, devuelve una respuesta de error
-             return response()->json(['error' => 'Cliente no encontrado'], 404);
+             return response()->json([
+                'status' => false,
+                'error' => 'Cliente no encontrado'
+            ], 404);
          }
 
          // Elimina el cliente
