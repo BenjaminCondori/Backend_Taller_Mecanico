@@ -54,8 +54,8 @@ class ProductoController extends Controller
         // ]);
 
         // bitacora
-        $descripcion = 'Se creó un nuevo producto con ID: '.$producto->id;
-        registrarBitacora($descripcion);
+        // $descripcion = 'Se creó un nuevo producto con ID: '.$producto->id;
+        // registrarBitacora($descripcion);
 
         return response()->json([
             'status' => true,
