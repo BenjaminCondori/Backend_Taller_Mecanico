@@ -16,6 +16,7 @@ use App\Http\Controllers\VehiculoController;
 use App\Http\Controllers\DiagnosticoController;
 use App\Http\Controllers\BitacoraController;
 use App\Http\Controllers\CotizacionController;
+use App\Http\Controllers\ServicioController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
