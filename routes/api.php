@@ -17,7 +17,6 @@ use App\Http\Controllers\VehiculoController;
 use App\Http\Controllers\DiagnosticoController;
 use App\Http\Controllers\BitacoraController;
 use App\Http\Controllers\CotizacionController;
-use App\Http\Controllers\ServicioController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -72,13 +71,7 @@ Route::post("/login", [JWTController::class, "login"]);
     Route::put('/modelos/{id}', [ModeloController::class, 'update']);
     Route::delete('/modelos/{id}', [ModeloController::class, 'destroy']);
 
-    Route::get('/modelos', [ModeloController::class, 'index']);
-    Route::post('/modelos', [ModeloController::class, 'store']);
-    Route::get('/modelos/{id}', [ModeloController::class, 'show']);
-    Route::put('/modelos/{id}', [ModeloController::class, 'update']);
-    Route::delete('/modelos/{id}', [ModeloController::class, 'destroy']);
-
-    Route::get('/puestos', [PuestoController::class, 'index']);
+        Route::get('/puestos', [PuestoController::class, 'index']);
     Route::post('/puestos', [PuestoController::class, 'store']);
     Route::get('/puestos/{id}', [PuestoController::class, 'show']);
     Route::put('/puestos/{id}', [PuestoController::class, 'update']);
@@ -107,12 +100,6 @@ Route::post('/diagnosticos', [DiagnosticoController::class, 'store']);
 Route::get('/diagnosticos/{id}', [DiagnosticoController::class, 'show']);
 Route::put('/diagnosticos/{id}', [DiagnosticoController::class, 'update']);
 Route::delete('/diagnosticos/{id}', [DiagnosticoController::class, 'destroy']);
-
-Route::get('/proveedores', [ProveedorController::class, 'index']);
-Route::post('/proveedores', [ProveedorController::class, 'store']);
-Route::get('/proveedores/{id}', [ProveedorController::class, 'show']);
-Route::put('/proveedores/{id}', [ProveedorController::class, 'update']);
-Route::delete('/proveedores/{id}', [ProveedorController::class, 'destroy']);
 
 Route::get('/categorias', [CategoriaController::class, 'index']);
 Route::post('/categorias', [CategoriaController::class, 'store']);
