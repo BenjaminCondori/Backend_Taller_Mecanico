@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('bitacoras', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_usuario');
-            $table->string('usuario');
+            $table->string('fecha');
             $table->string('ip_usuario');
             $table->string('descripcion');
+            $table->foreign('id_usuario')->references('id')->on('usuarios')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\Cotizacion;
 use App\Models\CotizacionProducto;
+use App\Models\CotizacionServicio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -42,7 +43,7 @@ class CotizacionController extends Controller
         ]);
 
         // se registra la tabla intermedia entre cotizacion y producto
-     /*   $productos = $request->productos;
+        $productos = $request->productos;
         foreach($productos as $item)
             CotizacionProducto::create([
                 'producto_cantidad' => $item['producto_cantidad'],
@@ -59,11 +60,11 @@ class CotizacionController extends Controller
                 'servicio_preciototal' => (decimal) [$item['servicio_cantidad']]* (decimal) [$item['precio']],
                 'cotizacion_id' => $cotizacion->id,
                 'servicio_id' => $item['id'],
-            ]);*/
+            ]);
 
         // bitacora
-        $descripcion = 'Se creó una nueva cotizacion con ID: '.$cotizacion->id;
-        registrarBitacora($descripcion);
+        // $descripcion = 'Se creó una nueva cotizacion con ID: '.$cotizacion->id;
+        // registrarBitacora($descripcion);
 
         return response()->json([
             'status' => true,
@@ -168,8 +169,8 @@ class CotizacionController extends Controller
         $cotizacion->delete();
 
         // bitacora
-        $descripcion = 'Se elimino la cotizacion con ID: '.$cotizacion->id;
-        registrarBitacora($descripcion);
+        // $descripcion = 'Se elimino la cotizacion con ID: '.$cotizacion->id;
+        // registrarBitacora($descripcion);
 
         return response()->json([
             'status' => true,

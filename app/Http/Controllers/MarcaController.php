@@ -22,13 +22,11 @@ class MarcaController extends Controller
 
     public function store(Request $request)
     {
-        $marca = Marca::create([
-            'nombre' => $request->nombre,
-        ]);
+        $marca = Marca::create($request->all());
 
         // bitacora
-        $descripcion = 'Se creó una nueva marca con ID: '.$marca->id;
-        registrarBitacora($descripcion);
+        // $descripcion = 'Se creó una nueva marca con ID: '.$marca->id;
+        // registrarBitacora($descripcion);
 
         return response()->json([
             'status' => true,
@@ -64,15 +62,17 @@ class MarcaController extends Controller
         $marca = Marca::find($id);
 
         if (!$marca) {
-            return response()->json(['error' => 'No se encontró la marca'], 404);
+            return response()->json([
+                'status' => false,
+                'error' => 'No se encontró la marca'
+            ], 404);
         }
 
-        $marca->nombre = $request->nombre;
-        $marca->save();
+        $marca->update($request->all());
 
         // bitacora
-        $descripcion = 'Se actualizo una marca con ID: '.$marca->id;
-        registrarBitacora($descripcion);
+        // $descripcion = 'Se actualizo una marca con ID: '.$marca->id;
+        // registrarBitacora($descripcion);
 
         return response()->json([
             'status' => true,
@@ -87,14 +87,17 @@ class MarcaController extends Controller
         $marca = Marca::find($id);
 
         if (!$marca) {
-            return response()->json(['error' => 'No se encontró la marca'], 404);
+            return response()->json([
+                'status' => false,
+                'error' => 'No se encontró la marca'
+            ], 404);
         }
 
         $marca->delete();
 
         // bitacora
-        $descripcion = 'Se elimino una marca con ID: '.$marca->id;
-        registrarBitacora($descripcion);
+        // $descripcion = 'Se elimino una marca con ID: '.$marca->id;
+        // registrarBitacora($descripcion);
 
         return response()->json([
             'status' => true,

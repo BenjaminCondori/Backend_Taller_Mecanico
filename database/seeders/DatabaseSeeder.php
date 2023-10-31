@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
             VehiculoSeeder::class,
             ProveedorSeeder::class,
             CategoriaSeeder::class,
-            InventarioSeeder::class,
+            // InventarioSeeder::class,
             ServicioSeeder::class,
             ProductoSeeder::class,
             DiagnosticoSeeder::class,

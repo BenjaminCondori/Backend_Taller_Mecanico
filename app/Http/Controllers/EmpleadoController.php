@@ -33,12 +33,15 @@ class EmpleadoController extends Controller
 
         // Verificar que el usuario se haya creado correctamente
         if (!$usuario) {
-            return response()->json(['error' => 'Error al crear al usuario'], 404);
+            return response()->json([
+                'status' => false,
+                'error' => 'Error al crear al usuario'
+            ], 404);
         }
 
         // bitacora
-        $descripcion = 'Se creó un nuevo usuario con ID: '.$usuario->id;
-        registrarBitacora($descripcion);
+        // $descripcion = 'Se creó un nuevo usuario con ID: '.$usuario->id;
+        // registrarBitacora($descripcion);
 
         // Crear un nuevo cliente relacionado con el usuario
         $empleado = new Empleado([
@@ -52,8 +55,8 @@ class EmpleadoController extends Controller
         ]);
 
         // bitacora
-        $descripcion = 'Se creó un nuevo empleado con ID: '.$empleado->id;
-        registrarBitacora($descripcion);
+        // $descripcion = 'Se creó un nuevo empleado con ID: '.$empleado->id;
+        // registrarBitacora($descripcion);
 
         // Asociar el cliente con el usuario
         $usuario->empleado()->save($empleado);
@@ -109,8 +112,8 @@ class EmpleadoController extends Controller
         $empleado->save();
 
         // bitacora
-        $descripcion = 'Se actualizo un empleado con ID: '.$empleado->id;
-        registrarBitacora($descripcion);
+        // $descripcion = 'Se actualizo un empleado con ID: '.$empleado->id;
+        // registrarBitacora($descripcion);
 
         // Actualiza el correo electrónico del usuario asociado (si ha cambiado)
         $empleado->usuario->email = $request->email;

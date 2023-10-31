@@ -25,7 +25,7 @@ function registrarBitacora(Request $request, string $descripcion) {
         $ip = getenv('HTTP_X_FORWARDED');
     } elseif (getenv('HTTP_FORWARDED_FOR')){
         $ip = getenv('HTTP_FORWARDED_FOR');
-    }elseif (getenc('HTTP_FORWARDED')){
+    }elseif (getenv('HTTP_FORWARDED')){
         $ip = getenv('HTTP_FORWARDED');
     } else {
         $ip = $_SERVER['REMOTE_ADDR'];
@@ -33,7 +33,8 @@ function registrarBitacora(Request $request, string $descripcion) {
 
     Bitacora::create([
         'id_usuario' => $usuario->id,
-        'usuario' => $nombre_usuario,
+        // 'usuario' => $nombre_usuario,
+        'fecha' => date('Y-m-d H:i:s'),
         'ip_usuario' => (string) [$ip],
         'descripcion' => $descripcion,
     ]);

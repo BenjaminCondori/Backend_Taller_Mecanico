@@ -19,12 +19,14 @@ return new class extends Migration
             $table->decimal('precio_compra', 10, 2);
             $table->string('unidad_medida')->nullable();
             $table->string('imagen')->nullable();
+            $table->integer('stock_disponible');
+            $table->integer('stock_minimo');
             $table->unsignedBigInteger('categoria_id');
             $table->foreign('categoria_id')->references('id')->on('categorias')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('proveedor_id');
             $table->foreign('proveedor_id')->references('id')->on('proveedores')->onDelete('cascade')->onUpdate('cascade');
-            $table->unsignedBigInteger('inventario_id')->nullable();
-            $table->foreign('inventario_id')->references('id')->on('inventarios')->onDelete('cascade')->onUpdate('cascade');
+            // $table->unsignedBigInteger('inventario_id')->nullable();
+            // $table->foreign('inventario_id')->references('id')->on('inventarios')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

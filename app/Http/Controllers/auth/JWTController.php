@@ -5,6 +5,7 @@ namespace App\Http\Controllers\auth;
 use App\Http\Controllers\Controller;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class JWTController extends Controller
@@ -29,7 +30,7 @@ class JWTController extends Controller
                 'status' => true,
                 'message' => 'Inicio sesión exitoso',
                 'token' => $token,
-                'usuario' => auth()->user(),
+                'usuario' => Auth::user(),
             ], 200);
         }
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Rol;
 use Illuminate\Http\Request;
 
 class RolController extends Controller
@@ -11,7 +12,10 @@ class RolController extends Controller
      */
     public function index()
     {
-        //
+        // $roles = Rol::all();
+        $roles = Rol::where('nombre', '!=', 'Cliente')->get();
+        // $roles = Rol::whereNotIn('nombre', ['Cliente'])->get();
+        return response()->json($roles);
     }
 
     /**
@@ -27,7 +31,16 @@ class RolController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rol = Rol::create([
+            'nombre' => $request->nombre,
+            'descripcion' => $request->descripcion,
+        ]);
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Rol creado satisfactoriamente',
+            'rol' => $rol
+        ], 201);
     }
 
     /**
@@ -35,7 +48,16 @@ class RolController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $rol = Rol::find($id);
+
+        if (!$rol) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Rol no encontrado'
+            ], 404);
+        }
+
+        return response()->json($rol);
     }
 
     /**
@@ -51,7 +73,22 @@ class RolController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $rol = Rol::find($id);
+
+        if (!$rol) {
+            return response()->json([
+                'status' => false,
+                'message' => 'No se encontró el rol'
+            ], 404);
+        }
+
+        $rol->update($request->all());
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Rol actualizado satisfactoriamente',
+            'rol' => $rol
+        ], 200);
     }
 
     /**
@@ -59,6 +96,21 @@ class RolController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $rol = Rol::find($id);
+
+        if (!$rol) {
+            return response()->json([
+                'status' => false,
+                'message' => 'No se encontró el rol'
+            ], 404);
+        }
+
+        $rol->delete();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Rol eliminado satisfactoriamente',
+            'rol' => $rol
+        ], 200);
     }
 }

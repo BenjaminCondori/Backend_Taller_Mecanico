@@ -14,7 +14,8 @@ class BitacoraController extends Controller
     public function index()
     {
 
-        $bitacora = Bitacora::all();
+        // $bitacora = Bitacora::all();
+        $bitacora = Bitacora::with('usuario')->get();
         return response()->json($bitacora);
 
     }
