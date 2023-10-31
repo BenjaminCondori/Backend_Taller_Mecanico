@@ -16,6 +16,8 @@ use App\Http\Controllers\VehiculoController;
 use App\Http\Controllers\DiagnosticoController;
 use App\Http\Controllers\BitacoraController;
 use App\Http\Controllers\CotizacionController;
+use App\Http\Controllers\PermisoController;
+use App\Http\Controllers\RolController;
 use App\Http\Controllers\ServicioController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -37,69 +39,78 @@ Route::post("/login", [JWTController::class, "login"]);
 //     "middleware" => ["auth:api"]
 // ], function () {
 
-    Route::get("/profile", [JWTController::class, "profile"]);
-    Route::post("/refresh", [JWTController::class, "refreshToken"]);
-    Route::post("/logout", [JWTController::class, "logout"]);
+Route::get("/profile", [JWTController::class, "profile"]);
+Route::post("/refresh", [JWTController::class, "refreshToken"]);
+Route::post("/logout", [JWTController::class, "logout"]);
 
-    Route::get('/clientes', [ClienteController::class, 'index']);
-    Route::post('/clientes', [ClienteController::class, 'store']);
-    Route::get('/clientes/{id}', [ClienteController::class, 'show']);
-    Route::put('/clientes/{id}', [ClienteController::class, 'update']);
-    Route::delete('/clientes/{id}', [ClienteController::class, 'destroy']);
+Route::get('/clientes', [ClienteController::class, 'index']);
+Route::post('/clientes', [ClienteController::class, 'store']);
+Route::get('/clientes/{id}', [ClienteController::class, 'show']);
+Route::put('/clientes/{id}', [ClienteController::class, 'update']);
+Route::delete('/clientes/{id}', [ClienteController::class, 'destroy']);
 
-    Route::get('/empleados', [EmpleadoController::class, 'index']);
-    Route::post('/empleados', [EmpleadoController::class, 'store']);
-    Route::get('/empleados/{id}', [EmpleadoController::class, 'show']);
-    Route::put('/empleados/{id}', [EmpleadoController::class, 'update']);
-    Route::delete('/empleados/{id}', [EmpleadoController::class, 'destroy']);
+Route::get('/empleados', [EmpleadoController::class, 'index']);
+Route::post('/empleados', [EmpleadoController::class, 'store']);
+Route::get('/empleados/{id}', [EmpleadoController::class, 'show']);
+Route::put('/empleados/{id}', [EmpleadoController::class, 'update']);
+Route::delete('/empleados/{id}', [EmpleadoController::class, 'destroy']);
 
-    Route::get('/usuarios', [UsuarioController::class, 'index']);
-    Route::post('/usuarios', [UsuarioController::class, 'store']);
-    Route::get('/usuarios/{id}', [UsuarioController::class, 'show']);
-    Route::put('/usuarios/{id}', [UsuarioController::class, 'update']);
-    Route::delete('/usuarios/{id}', [UsuarioController::class, 'destroy']);
+Route::get('/usuarios', [UsuarioController::class, 'index']);
+Route::post('/usuarios', [UsuarioController::class, 'store']);
+Route::get('/usuarios/{id}', [UsuarioController::class, 'show']);
+Route::put('/usuarios/{id}', [UsuarioController::class, 'update']);
+Route::delete('/usuarios/{id}', [UsuarioController::class, 'destroy']);
 
-    Route::get('/marcas', [MarcaController::class, 'index']);
-    Route::post('/marcas', [MarcaController::class, 'store']);
-    Route::get('/marcas/{id}', [MarcaController::class, 'show']);
-    Route::put('/marcas/{id}', [MarcaController::class, 'update']);
-    Route::delete('/marcas/{id}', [MarcaController::class, 'destroy']);
+Route::get('/roles', [RolController::class, 'index']);
+Route::post('/roles', [RolController::class, 'store']);
+Route::get('/roles/{id}', [RolController::class, 'show']);
+Route::put('/roles/{id}', [RolController::class, 'update']);
+Route::delete('/roles/{id}', [RolController::class, 'destroy']);
 
-    Route::get('/modelos', [ModeloController::class, 'index']);
-    Route::post('/modelos', [ModeloController::class, 'store']);
-    Route::get('/modelos/{id}', [ModeloController::class, 'show']);
-    Route::put('/modelos/{id}', [ModeloController::class, 'update']);
-    Route::delete('/modelos/{id}', [ModeloController::class, 'destroy']);
+Route::get('/permisos', [PermisoController::class, 'index']);
+Route::post('/permisos', [PermisoController::class, 'asignarPermiso']);
 
-    Route::get('/modelos', [ModeloController::class, 'index']);
-    Route::post('/modelos', [ModeloController::class, 'store']);
-    Route::get('/modelos/{id}', [ModeloController::class, 'show']);
-    Route::put('/modelos/{id}', [ModeloController::class, 'update']);
-    Route::delete('/modelos/{id}', [ModeloController::class, 'destroy']);
+Route::get('/marcas', [MarcaController::class, 'index']);
+Route::post('/marcas', [MarcaController::class, 'store']);
+Route::get('/marcas/{id}', [MarcaController::class, 'show']);
+Route::put('/marcas/{id}', [MarcaController::class, 'update']);
+Route::delete('/marcas/{id}', [MarcaController::class, 'destroy']);
 
-    Route::get('/puestos', [PuestoController::class, 'index']);
-    Route::post('/puestos', [PuestoController::class, 'store']);
-    Route::get('/puestos/{id}', [PuestoController::class, 'show']);
-    Route::put('/puestos/{id}', [PuestoController::class, 'update']);
-    Route::delete('/puestos/{id}', [PuestoController::class, 'destroy']);
+Route::get('/modelos', [ModeloController::class, 'index']);
+Route::post('/modelos', [ModeloController::class, 'store']);
+Route::get('/modelos/{id}', [ModeloController::class, 'show']);
+Route::put('/modelos/{id}', [ModeloController::class, 'update']);
+Route::delete('/modelos/{id}', [ModeloController::class, 'destroy']);
 
-    Route::get('/vehiculos', [VehiculoController::class, 'index']);
-    Route::post('/vehiculos', [VehiculoController::class, 'store']);
-    Route::get('/vehiculos/{id}', [VehiculoController::class, 'show']);
-    Route::put('/vehiculos/{id}', [VehiculoController::class, 'update']);
-    Route::delete('/vehiculos/{id}', [VehiculoController::class, 'destroy']);
+Route::get('/modelos', [ModeloController::class, 'index']);
+Route::post('/modelos', [ModeloController::class, 'store']);
+Route::get('/modelos/{id}', [ModeloController::class, 'show']);
+Route::put('/modelos/{id}', [ModeloController::class, 'update']);
+Route::delete('/modelos/{id}', [ModeloController::class, 'destroy']);
 
-    Route::get('/tipo-vehiculos', [TipoVehiculoController::class, 'index']);
-    Route::post('/tipo-vehiculos', [TipoVehiculoController::class, 'store']);
-    Route::get('/tipo-vehiculos/{id}', [TipoVehiculoController::class, 'show']);
-    Route::put('/tipo-vehiculos/{id}', [TipoVehiculoController::class, 'update']);
-    Route::delete('/tipo-vehiculos/{id}', [TipoVehiculoController::class, 'destroy']);
+Route::get('/puestos', [PuestoController::class, 'index']);
+Route::post('/puestos', [PuestoController::class, 'store']);
+Route::get('/puestos/{id}', [PuestoController::class, 'show']);
+Route::put('/puestos/{id}', [PuestoController::class, 'update']);
+Route::delete('/puestos/{id}', [PuestoController::class, 'destroy']);
 
-    Route::get('/proveedores', [ProveedorController::class, 'index']);
-    Route::post('/proveedores', [ProveedorController::class, 'store']);
-    Route::get('/proveedores/{id}', [ProveedorController::class, 'show']);
-    Route::put('/proveedores/{id}', [ProveedorController::class, 'update']);
-    Route::delete('/proveedores/{id}', [ProveedorController::class, 'destroy']);
+Route::get('/vehiculos', [VehiculoController::class, 'index']);
+Route::post('/vehiculos', [VehiculoController::class, 'store']);
+Route::get('/vehiculos/{id}', [VehiculoController::class, 'show']);
+Route::put('/vehiculos/{id}', [VehiculoController::class, 'update']);
+Route::delete('/vehiculos/{id}', [VehiculoController::class, 'destroy']);
+
+Route::get('/tipo-vehiculos', [TipoVehiculoController::class, 'index']);
+Route::post('/tipo-vehiculos', [TipoVehiculoController::class, 'store']);
+Route::get('/tipo-vehiculos/{id}', [TipoVehiculoController::class, 'show']);
+Route::put('/tipo-vehiculos/{id}', [TipoVehiculoController::class, 'update']);
+Route::delete('/tipo-vehiculos/{id}', [TipoVehiculoController::class, 'destroy']);
+
+Route::get('/proveedores', [ProveedorController::class, 'index']);
+Route::post('/proveedores', [ProveedorController::class, 'store']);
+Route::get('/proveedores/{id}', [ProveedorController::class, 'show']);
+Route::put('/proveedores/{id}', [ProveedorController::class, 'update']);
+Route::delete('/proveedores/{id}', [ProveedorController::class, 'destroy']);
 
 Route::get('/diagnosticos', [DiagnosticoController::class, 'index']);
 Route::post('/diagnosticos', [DiagnosticoController::class, 'store']);

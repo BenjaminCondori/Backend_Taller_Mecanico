@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\Cotizacion;
 use App\Models\CotizacionProducto;
+use App\Models\CotizacionServicio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -37,33 +38,33 @@ class CotizacionController extends Controller
             'descripcion' => $request->descripcion,
             'fecha' => Carbon::now(),
             'precio' => $request->precioTotal,
-            'cliente_id' => $request->cliente['id'],
-            'vehiculo_id' => $request->vehiculo['id'],
+            'cliente_id' => $request->cliente,
+            'vehiculo_id' => $request->vehiculo,
         ]);
 
         // se registra la tabla intermedia entre cotizacion y producto
-        $productos = $request->productos;
-        foreach($productos as $item)
-            CotizacionProducto::create([
-                'producto_cantidad' => $item['producto_cantidad'],
-                'producto_preciototal' => (decimal)[$item['producto_cantidad']]*(decimal) [$item['precio']],
-                'cotizacion_id' => $cotizacion->id,
-                'producto_id' => $item['id'],
-            ]);
+        // $productos = $request->productos;
+        // foreach($productos as $item)
+        //     CotizacionProducto::create([
+        //         'producto_cantidad' => $item['producto_cantidad'],
+        //         'producto_preciototal' => (float)[$item['producto_cantidad']]*(float) [$item['precio']],
+        //         'cotizacion_id' => $cotizacion->id,
+        //         'producto_id' => $item['id'],
+        //     ]);
 
         // se registra la tabla intermedia enrte cotizacion y servicios
-        $servicios = $request->servicios;
-        foreach($servicios as $item)
-            CotizacionServicio::create([
-                'servicio_cantidad' => $item['servicio_cantidad'],
-                'servicio_preciototal' => (decimal) [$item['servicio_cantidad']]* (decimal) [$item['precio']],
-                'cotizacion_id' => $cotizacion->id,
-                'servicio_id' => $item['id'],
-            ]);
+        // $servicios = $request->servicios;
+        // foreach($servicios as $item)
+        //     CotizacionServicio::create([
+        //         'servicio_cantidad' => $item['servicio_cantidad'],
+        //         'servicio_preciototal' => (float) [$item['servicio_cantidad']]* (float) [$item['precio']],
+        //         'cotizacion_id' => $cotizacion->id,
+        //         'servicio_id' => $item['id'],
+        //     ]);
 
         // bitacora
-        $descripcion = 'Se creó una nueva cotizacion con ID: '.$cotizacion->id;
-        registrarBitacora($descripcion);
+        // $descripcion = 'Se creó una nueva cotizacion con ID: '.$cotizacion->id;
+        // registrarBitacora($descripcion);
 
         return response()->json([
             'status' => true,
@@ -154,8 +155,8 @@ class CotizacionController extends Controller
         $cotizacion->delete();
 
         // bitacora
-        $descripcion = 'Se elimino la cotizacion con ID: '.$cotizacion->id;
-        registrarBitacora($descripcion);
+        // $descripcion = 'Se elimino la cotizacion con ID: '.$cotizacion->id;
+        // registrarBitacora($descripcion);
 
         return response()->json([
             'status' => true,

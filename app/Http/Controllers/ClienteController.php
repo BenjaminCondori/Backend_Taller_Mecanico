@@ -25,6 +25,17 @@ class ClienteController extends Controller
 
     public function store(Request $request)
     {
+        // Validación de datos
+        $request->validate([
+            'ci' => 'required|unique:clientes',
+            'nombre' => 'required|string|min:2|max:100',
+            'apellido' => 'required|string|min:2|max:100',
+            'telefono' => 'required',
+            'direccion' => 'required',
+            'genero' => 'required|max:1',
+            'email' => 'required|string|email|max:100|unique:usuarios',
+        ]);
+
         // Comprueba si se proporciona un campo 'password' en la solicitud
         if ($request->has('password')) {
             $password = Hash::make($request->password);
@@ -46,8 +57,8 @@ class ClienteController extends Controller
         }
 
         // bitacora
-        $descripcion = 'Se creó un nuevo usuario con ID: '.$usuario->id;
-        registrarBitacora($descripcion);
+        // $descripcion = 'Se creó un nuevo usuario con ID: '.$usuario->id;
+        // registrarBitacora($descripcion);
 
         // Crear un nuevo cliente relacionado con el usuario
         $cliente = new Cliente([
@@ -60,8 +71,8 @@ class ClienteController extends Controller
         ]);
 
         // bitacora
-        $descripcion = 'Se creó un nuevo cliente con ID: '.$cliente->id;
-        registrarBitacora($descripcion);
+        // $descripcion = 'Se creó un nuevo cliente con ID: '.$cliente->id;
+        // registrarBitacora($request, $descripcion);
 
         // Asociar el cliente con el usuario
         $usuario->cliente()->save($cliente);
@@ -116,8 +127,8 @@ class ClienteController extends Controller
         $cliente->save();
 
         // bitacora
-        $descripcion = 'Se actualizo un cliente con ID: '.$cliente->id;
-        registrarBitacora($descripcion);
+        // $descripcion = 'Se actualizo un cliente con ID: '.$cliente->id;
+        // registrarBitacora($descripcion);
 
         // Actualiza el correo electrónico del usuario asociado (si ha cambiado)
         if ($cliente->usuario->email !== $request->email) {
@@ -125,8 +136,8 @@ class ClienteController extends Controller
             $cliente->usuario->save();
 
             // bitacora
-            $descripcion = 'Se actualizo el correo de un usuario con ID: '.$cliente->usuario->id;
-            registrarBitacora($descripcion);
+            // $descripcion = 'Se actualizo el correo de un usuario con ID: '.$cliente->usuario->id;
+            // registrarBitacora($descripcion);
         }
 
         // Devuelve una respuesta exitosa
@@ -156,8 +167,8 @@ class ClienteController extends Controller
          $cliente->delete();
 
         // bitacora
-        $descripcion = 'Se elimino el cliente con ID: '.$cliente->id;
-        registrarBitacora($descripcion);
+        // $descripcion = 'Se elimino el cliente con ID: '.$cliente->id;
+        // registrarBitacora($descripcion);
 
          // Encuentra el usuario asociado al cliente
          $usuario = $cliente->usuario;
@@ -168,8 +179,8 @@ class ClienteController extends Controller
          }
 
         // bitacora
-        $descripcion = 'Se elimino el usuario con ID: '.$usuario->id;
-        registrarBitacora($descripcion);
+        // $descripcion = 'Se elimino el usuario con ID: '.$usuario->id;
+        // registrarBitacora($descripcion);
 
          // Devuelve una respuesta exitosa
          $data = [

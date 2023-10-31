@@ -9,7 +9,7 @@ class ServicioController extends Controller
 {
     public function index()
     {
-        $servicios = Servicio::all();
+        $servicios = Servicio::with('categoria')->get();
         return response()->json($servicios);
     }
 
@@ -25,7 +25,7 @@ class ServicioController extends Controller
         $servicio = Servicio::create($request->all());
 
         // bitacora
-        $descripcion = 'Se creó un nuevo servicio con ID: '.$servicio->id;
+        // $descripcion = 'Se creó un nuevo servicio con ID: '.$servicio->id;
         //registrarBitacora($descripcion);
 
         return response()->json([

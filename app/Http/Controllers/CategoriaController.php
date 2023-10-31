@@ -9,7 +9,10 @@ class CategoriaController extends Controller
 {
     public function index()
     {
-        $categorias = Categoria::all();
+        // $categorias = Categoria::all();
+        $categorias = Categoria::whereNotIn('nombre', ['Servicios', 'Productos'])
+            ->with('categoriaPadre')
+            ->get();
         return response()->json($categorias);
     }
 
@@ -25,7 +28,7 @@ class CategoriaController extends Controller
         $categoria = Categoria::create($request->all());
 
         // bitacora
-        $descripcion = 'Se creó una nueva categoria con ID: '.$categoria->id;
+        // $descripcion = 'Se creó una nueva categoria con ID: '.$categoria->id;
         //registrarBitacora($descripcion);
 
         return response()->json([

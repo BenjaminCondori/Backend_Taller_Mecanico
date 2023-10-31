@@ -45,6 +45,10 @@ class Usuario extends Authenticatable implements JWTSubject
         return $this->hasOne(Cliente::class, 'usuario_id');
     }
 
+    public function bitacoras(): HasMany {
+        return $this->hasMany(Bitacora::class, 'id_usuario');
+    }
+
     public function getJWTIdentifier()
     {
       return $this->getKey();

@@ -10,7 +10,8 @@ class UsuarioController extends Controller
 {
     public function index()
     {
-        $usuarios = Usuario::all();
+        // $usuarios = Usuario::all();
+        $usuarios = Usuario::has('empleado')->with('empleado', 'rol')->get();
         return response()->json($usuarios);
     }
 
@@ -39,7 +40,8 @@ class UsuarioController extends Controller
 
     public function show(string $id)
     {
-        $usuario = Usuario::find($id);
+        // $usuario = Usuario::find($id);
+        $usuario = Usuario::has('empleado')->with('empleado', 'rol')->find($id);
 
         if (!$usuario) {
             return response()->json([
@@ -92,13 +94,6 @@ class UsuarioController extends Controller
                 'status' => false,
                 'error' => 'No se encontró el usuario'
             ], 404);
-        }
-
-        if (!$usuario->empleado || !$usuario->cliente) {
-            return response()->json([
-                'status' => false,
-                'error' => 'No se puede eliminar el usuario porque tiene un empleado o cliente asociado'
-            ], 500);
         }
 
         $usuario->delete();

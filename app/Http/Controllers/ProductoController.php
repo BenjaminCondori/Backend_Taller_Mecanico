@@ -25,43 +25,15 @@ class ProductoController extends Controller
 
     public function store(Request $request)
     {
-        // $image_name = null;
-        // if ($request->hasFile('picture')) {
-        //     $file = $request->file('picture');
-        //     $image_name = time().'_'.$file->getClientOriginalName();
-        //     $image_name = Str::slug($image_name).".".$file->guessExtension();
-        //     $file->move(public_path("/image"), $image_name);
-        // }
 
-        // $inventario = Inventario::create([
-        //     'stock_disponible' => $request->stock_disponible,
-        //     'stock_minimo' => $request->stock_minimo,
-        // ]);
 
         $producto = Producto::create($request->all());
-        // $producto->update(['inventario_id' => $inventario->id]);
 
-        // $producto = Producto::create([
-        //     'nombre' => $request->nombre,
-        //     'descripcion' => $request->descripcion,
-        //     'precio_venta' => $request->precio_venta,
-        //     'precio_compra' => $request->precio_compra,
-        //     'categoria_id' => $request->categoria_id,
-        //     'proveedor_id' => $request->proveedor_id,
-        //     'unidad_medida' => 'Unidades',
-        //     'inventario_id' => $inventario->id,
-        //     'imagen' => $request->picture,
-        // ]);
-
-        // bitacora
-        // $descripcion = 'Se creó un nuevo producto con ID: '.$producto->id;
-        // registrarBitacora($descripcion);
 
         return response()->json([
             'status' => true,
             'message' => 'Producto creado satisfactoriamente',
             'producto' => $producto,
-            // 'inventario' => $inventario,
         ], 201);
     }
 

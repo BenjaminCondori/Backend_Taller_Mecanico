@@ -9,7 +9,7 @@ class ModeloController extends Controller
 {
     public function index()
     {
-        $modelos = Modelo::all();
+        $modelos = Modelo::with('marca')->get();
         return response()->json($modelos);
     }
 
@@ -22,14 +22,11 @@ class ModeloController extends Controller
 
     public function store(Request $request)
     {
-        $modelo = Modelo::create([
-            'nombre' => $request->nombre,
-            'marca_id' => $request->marca_id,
-        ]);
+        $modelo = Modelo::create($request->all());
 
         // bitacora
-        $descripcion = 'Se creó un nuevo modelo con ID: '.$modelo->id;
-        registrarBitacora($descripcion);
+        // $descripcion = 'Se creó un nuevo modelo con ID: '.$modelo->id;
+        // registrarBitacora($descripcion);
 
         return response()->json([
             'status' => true,
@@ -61,20 +58,20 @@ class ModeloController extends Controller
 
     public function update(Request $request, string $id)
     {
-        $modelo = Modelo::find($request->id);
+        $modelo = Modelo::find($id);
 
         if (!$modelo) {
-            return response()->json(['error' => 'No se encontró el modelo'], 404);
+            return response()->json([
+                'status' => false,
+                'error' => 'No se encontró el modelo'
+            ], 404);
         }
 
-        $modelo->update([
-            'nombre' => $request->nombre,
-            'marca_id' => $request->marca_id,
-        ]);
+        $modelo->update($request->all());
 
         // bitacora
-        $descripcion = 'Se actualizo un modelo con ID: '.$modelo->id;
-        registrarBitacora($descripcion);
+        // $descripcion = 'Se actualizo un modelo con ID: '.$modelo->id;
+        // registrarBitacora($descripcion);
 
         return response()->json([
             'status' => true,
@@ -98,8 +95,8 @@ class ModeloController extends Controller
         $modelo->delete();
 
         // bitacora
-        $descripcion = 'Se elimino un modelo con ID: '.$modelo->id;
-        registrarBitacora($descripcion);
+        // $descripcion = 'Se elimino un modelo con ID: '.$modelo->id;
+        // registrarBitacora($descripcion);
 
         return response()->json([
             'status' => true,
