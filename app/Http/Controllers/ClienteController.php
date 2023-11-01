@@ -6,6 +6,7 @@ use App\Models\Cliente;
 use App\Models\Rol;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
 
 class ClienteController extends Controller

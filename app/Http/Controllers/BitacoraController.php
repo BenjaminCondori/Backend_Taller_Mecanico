@@ -15,7 +15,7 @@ class BitacoraController extends Controller
     {
 
         // $bitacora = Bitacora::all();
-        $bitacora = Bitacora::with('usuario')->get();
+        $bitacora = Bitacora::with('usuario.empleado')->get();
         return response()->json($bitacora);
 
     }
@@ -40,7 +40,6 @@ class BitacoraController extends Controller
             'message' => 'Bitacora creada satisfactoriamente',
             'bitacora' => $bitacora
         ], 201);
-
     }
 
     /**

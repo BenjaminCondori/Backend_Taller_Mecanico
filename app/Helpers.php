@@ -7,12 +7,13 @@ use App\Models\Empleado;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 function registrarBitacora(Request $request, string $descripcion) {
 
     $usuario = Auth::user();
-
-    $nombre_usuario = nombreUsuario($usuario->id);
+    // dd($usuario);
+    // $nombre_usuario = nombreUsuario($usuario->id);
 
     // optenemos la ip de usuario
     $ip = $request->ip();
@@ -33,16 +34,16 @@ function registrarBitacora(Request $request, string $descripcion) {
 
     Bitacora::create([
         'id_usuario' => $usuario->id,
-        // 'usuario' => $nombre_usuario,
-        'fecha' => date('Y-m-d H:i:s'),
-        'ip_usuario' => (string) [$ip],
+        'fecha' => Carbon::now()->format('Y-m-d H:i:s'),
+        'ip_usuario' => $ip,
+        'ip_usuario' => $request->ip(),
         'descripcion' => $descripcion,
     ]);
 
 }
 
 function nombreUsuario($id){
-    $cliente = CLiente::where('usuario_id', $id)->first();
+    $cliente = Cliente::where('usuario_id', $id)->first();
     if ($cliente){ // verificamos si existe el cliente
         return $cliente->nombre .' ' .$cliente->apeliido;
     }

@@ -149,6 +149,7 @@ Route::put('/inventarios/{id}', [InventarioController::class, 'update']);
 Route::delete('/inventarios/{id}', [InventarioController::class, 'destroy']);
 
 Route::get('/bitacoras', [BitacoraController::class, 'index']);
+Route::post('/bitacoras', [BitacoraController::class, 'store']);
 
 Route::get('/cotizaciones', [CotizacionController::class, 'index']);
 Route::post('/cotizaciones', [CotizacionController::class, 'store']);
