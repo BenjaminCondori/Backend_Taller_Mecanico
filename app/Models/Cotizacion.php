@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Cotizacion extends Model
 {
@@ -36,6 +37,9 @@ class Cotizacion extends Model
     public function vehiculo(): BelongsTo {
         return $this->belongsTo(Vehiculo::class, 'vehiculo_id');
     }
-
+    
+    public function ordenDeTrabajo(): HasOne {
+        return $this->hasOne(OrdenDeTrabajo::class, 'cotizacion_id');
+    }
 
 }
