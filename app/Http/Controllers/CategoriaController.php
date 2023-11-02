@@ -27,10 +27,6 @@ class CategoriaController extends Controller
     {
         $categoria = Categoria::create($request->all());
 
-        // bitacora
-        // $descripcion = 'Se creó una nueva categoria con ID: '.$categoria->id;
-        //registrarBitacora($descripcion);
-
         return response()->json([
             'status' => true,
             'message' => 'Categoria creada satisfactoriamente',
@@ -77,10 +73,6 @@ class CategoriaController extends Controller
         }
         $categoria->save();
 
-        // bitacora
-        $descripcion = 'Se actualizo una categoria con ID: '.$categoria->id;
-       // registrarBitacora($descripcion);
-
         return response()->json([
             'status' => true,
             'message' => 'Categoria actualizada satisfactoriamente',
@@ -108,9 +100,6 @@ class CategoriaController extends Controller
         }
 
         $categoria->delete();
-
-        $descripcion = 'Se elimino una categoria con ID: '.$categoria->id;
-        //registrarBitacora($descripcion);
 
         return response()->json([
             'status' => true,

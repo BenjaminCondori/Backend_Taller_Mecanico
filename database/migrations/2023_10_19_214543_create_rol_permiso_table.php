@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('rol_permiso', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('rol_id');
-            $table->foreign('rol_id')->references('id')->on('roles');
+            $table->foreign('rol_id')->references('id')->on('roles')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('permiso_id');
             $table->foreign('permiso_id')->references('id')->on('permisos')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();

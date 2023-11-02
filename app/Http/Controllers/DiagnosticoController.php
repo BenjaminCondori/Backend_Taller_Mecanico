@@ -25,10 +25,6 @@ class DiagnosticoController extends Controller
     {
         $diagnostico = Diagnostico::create($request->all());
 
-        // bitacora
-        // $descripcion = 'Se creo un nuevo diagnostico con ID: '.$diagnostico->id;
-        // registrarBitacora($request, $descripcion);
-
         return response()->json([
             'status' => true,
             'message' => 'Diagnóstico creado satisfactoriamente',
@@ -71,10 +67,6 @@ class DiagnosticoController extends Controller
 
         $diagnostico->update($request->all());
 
-        // bitacora
-        // $descripcion = 'Se actualizo el diagnostico con ID: '.$diagnostico->id;
-        // registrarBitacora($request, $descripcion);
-
         return response()->json([
             'status' => true,
             'message' => 'Diagnostico actualizado satisfactoriamente',
@@ -95,10 +87,6 @@ class DiagnosticoController extends Controller
         }
 
         $diagnostico->delete();
-
-        // bitacora
-        // $descripcion = 'Se elimino el diagnostico con ID: '.$diagnostico->id;
-        // registrarBitacora($request, $descripcion);
 
         return response()->json([
             'status' => true,
