@@ -12,6 +12,8 @@ class CotizacionServicio extends Model
     protected $table = 'cotizacion_servicio';
 
     protected $fillable = [
+        'servicio_cantidad',
+        'servicio_preciototal',
         'cotizacion_id',
         'servicio_id',
     ];
