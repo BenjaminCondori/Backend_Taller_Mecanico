@@ -26,11 +26,15 @@ class JWTController extends Controller
 
         if (!empty($token)) {
             // Respuesta
+            $usuario = Auth::user();
+            
+            $usuario = Usuario::with('rol', 'empleado')->find($usuario->id);
+            
             return response()->json([
                 'status' => true,
                 'message' => 'Inicio sesión exitoso',
                 'token' => $token,
-                'usuario' => Auth::user(),
+                'usuario' => $usuario,
             ], 200);
         }
 

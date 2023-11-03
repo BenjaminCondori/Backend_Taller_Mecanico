@@ -25,10 +25,7 @@ class ProductoController extends Controller
 
     public function store(Request $request)
     {
-
-
         $producto = Producto::create($request->all());
-
 
         return response()->json([
             'status' => true,
@@ -48,8 +45,6 @@ class ProductoController extends Controller
                 'error' => 'No se encontró el producto',
             ], 404);
         }
-
-        // $imagenPath = public_path("/image") . '/' . $producto->imagen;
 
         return response()->json($producto);
     }
@@ -74,10 +69,6 @@ class ProductoController extends Controller
 
         $producto->update($request->all());
 
-        // bitacora
-        // $descripcion = 'Se actualizo un producto con ID: '.$producto->id;
-        // registrarBitacora($descripcion);
-
         return response()->json([
             'status' => true,
             'message' => 'Producto actualizado satisfactoriamente',
@@ -98,10 +89,6 @@ class ProductoController extends Controller
         }
 
         $producto->delete();
-
-        // bitacora
-        // $descripcion = 'Se elimino el producto con ID: '.$producto->id;
-        // registrarBitacora($descripcion);
 
         return response()->json([
             'status' => true,

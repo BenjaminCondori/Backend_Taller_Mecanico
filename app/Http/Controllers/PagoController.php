@@ -2,22 +2,16 @@
 
 namespace App\Http\Controllers;
 
-
-use App\Models\Bitacora;
 use Illuminate\Http\Request;
 
-class BitacoraController extends Controller
+class PagoController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-
-        // $bitacora = Bitacora::all();
-        $bitacora = Bitacora::with('usuario.empleado')->get();
-        return response()->json($bitacora);
-
+        //
     }
 
     /**
@@ -33,19 +27,13 @@ class BitacoraController extends Controller
      */
     public function store(Request $request)
     {
-        $bitacora = Bitacora::create($request->all());
-
-        return response()->json([
-            'status' => true,
-            'message' => 'Bitacora creada satisfactoriamente',
-            'bitacora' => $bitacora
-        ], 201);
+        //
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Bitacora $bitacora)
+    public function show(string $id)
     {
         //
     }
@@ -53,8 +41,7 @@ class BitacoraController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-
-    public function edit(Bitacora $bitacora)
+    public function edit(string $id)
     {
         //
     }
@@ -62,8 +49,7 @@ class BitacoraController extends Controller
     /**
      * Update the specified resource in storage.
      */
-
-    public function update(Request $request, Bitacora $bitacora)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -71,8 +57,7 @@ class BitacoraController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-
-    public function destroy(Bitacora $bitacora)
+    public function destroy(string $id)
     {
         //
     }

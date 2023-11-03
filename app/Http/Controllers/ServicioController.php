@@ -24,10 +24,6 @@ class ServicioController extends Controller
     {
         $servicio = Servicio::create($request->all());
 
-        // bitacora
-        // $descripcion = 'Se creó un nuevo servicio con ID: '.$servicio->id;
-        //registrarBitacora($descripcion);
-
         return response()->json([
             'status' => true,
             'message' => 'Servicio creado satisfactoriamente',
@@ -70,10 +66,6 @@ class ServicioController extends Controller
 
         $servicio->update($request->all());
 
-        // bitacora
-        $descripcion = 'Se actualizo un servicio con ID: '.$servicio->id;
-        //registrarBitacora($descripcion);
-
         return response()->json([
             'status' => true,
             'message' => 'Servicio actualizado satisfactoriamente',
@@ -94,10 +86,6 @@ class ServicioController extends Controller
         }
 
         $servicio->delete();
-
-        // bitacora
-        $descripcion = 'Se elimino el servicio con ID: '.$servicio->id;
-        //registrarBitacora($descripcion);
 
         return response()->json([
             'status' => true,

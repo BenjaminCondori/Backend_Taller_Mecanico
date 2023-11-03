@@ -68,7 +68,12 @@ Route::put('/roles/{id}', [RolController::class, 'update']);
 Route::delete('/roles/{id}', [RolController::class, 'destroy']);
 
 Route::get('/permisos', [PermisoController::class, 'index']);
-Route::post('/permisos', [PermisoController::class, 'asignarPermiso']);
+Route::get('/permisos-obtener/{rol_id}', [PermisoController::class, 'obtenerPermisos']);
+Route::post('/permisos-asignar', [PermisoController::class, 'asignarPermiso']);
+Route::post('/permisos-desasignar', [PermisoController::class, 'desasignarPermiso']);
+Route::post('/permisos-asignarTodos/{rol_id}', [PermisoController::class, 'asignarTodosLosPermisos']);
+Route::post('/permisos-desasignarTodos/{rol_id}', [PermisoController::class, 'desasignarTodosLosPermisos']);
+Route::get('/permisos-tienePermiso/{rol_id}/{permiso_id}', [PermisoController::class, 'tienePermiso']);
 
 Route::get('/marcas', [MarcaController::class, 'index']);
 Route::post('/marcas', [MarcaController::class, 'store']);
@@ -149,6 +154,7 @@ Route::put('/inventarios/{id}', [InventarioController::class, 'update']);
 Route::delete('/inventarios/{id}', [InventarioController::class, 'destroy']);
 
 Route::get('/bitacoras', [BitacoraController::class, 'index']);
+Route::post('/bitacoras', [BitacoraController::class, 'store']);
 
 Route::get('/cotizaciones', [CotizacionController::class, 'index']);
 Route::post('/cotizaciones', [CotizacionController::class, 'store']);

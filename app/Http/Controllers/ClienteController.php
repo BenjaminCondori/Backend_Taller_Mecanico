@@ -6,6 +6,7 @@ use App\Models\Cliente;
 use App\Models\Rol;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
 
 class ClienteController extends Controller
@@ -56,10 +57,6 @@ class ClienteController extends Controller
             return response()->json(['error' => 'Error al crear al usuario'], 404);
         }
 
-        // bitacora
-        // $descripcion = 'Se creó un nuevo usuario con ID: '.$usuario->id;
-        // registrarBitacora($descripcion);
-
         // Crear un nuevo cliente relacionado con el usuario
         $cliente = new Cliente([
             'ci' => $request->ci,
@@ -69,10 +66,6 @@ class ClienteController extends Controller
             'direccion' => $request->direccion,
             'genero' => $request->genero,
         ]);
-
-        // bitacora
-        // $descripcion = 'Se creó un nuevo cliente con ID: '.$cliente->id;
-        // registrarBitacora($request, $descripcion);
 
         // Asociar el cliente con el usuario
         $usuario->cliente()->save($cliente);
@@ -126,18 +119,10 @@ class ClienteController extends Controller
         $cliente->direccion = $request->direccion;
         $cliente->save();
 
-        // bitacora
-        // $descripcion = 'Se actualizo un cliente con ID: '.$cliente->id;
-        // registrarBitacora($descripcion);
-
         // Actualiza el correo electrónico del usuario asociado (si ha cambiado)
         if ($cliente->usuario->email !== $request->email) {
             $cliente->usuario->email = $request->email;
             $cliente->usuario->save();
-
-            // bitacora
-            // $descripcion = 'Se actualizo el correo de un usuario con ID: '.$cliente->usuario->id;
-            // registrarBitacora($descripcion);
         }
 
         // Devuelve una respuesta exitosa
@@ -166,10 +151,6 @@ class ClienteController extends Controller
          // Elimina el cliente
          $cliente->delete();
 
-        // bitacora
-        // $descripcion = 'Se elimino el cliente con ID: '.$cliente->id;
-        // registrarBitacora($descripcion);
-
          // Encuentra el usuario asociado al cliente
          $usuario = $cliente->usuario;
 
@@ -177,10 +158,6 @@ class ClienteController extends Controller
              // Elimina el usuario
              $usuario->delete();
          }
-
-        // bitacora
-        // $descripcion = 'Se elimino el usuario con ID: '.$usuario->id;
-        // registrarBitacora($descripcion);
 
          // Devuelve una respuesta exitosa
          $data = [

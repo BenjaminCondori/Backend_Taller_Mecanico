@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -12,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bitacoras', function (Blueprint $table) {
+        Schema::create('pagos', function (Blueprint $table) {
             $table->id();
             $table->dateTime('fecha');
-            $table->string('ip_usuario');
-            $table->string('descripcion');
-            $table->unsignedBigInteger('id_usuario');
-            $table->foreign('id_usuario')->references('id')->on('usuarios')->onDelete('cascade')->onUpdate('cascade');
+            $table->float('monto');
+            $table->text('descripcion');
+            $table->unsignedBigInteger('factura_id');
+            $table->foreign('factura_id')->references('id')->on('facturas')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('bitacoras');
+        Schema::dropIfExists('pagos');
     }
 };

@@ -14,14 +14,14 @@ class Bitacora extends Model
 
     protected $fillable = [
         'id_usuario',
-        'usuario',
+        'fecha',
         'ip_usuario',
         'descripcion',
     ];
 
     public function usuario(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'id_usuario');
+        return $this->belongsTo(Usuario::class, 'id_usuario');
     }
 
 }

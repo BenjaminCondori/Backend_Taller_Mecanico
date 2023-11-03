@@ -206,10 +206,6 @@ class CotizacionController extends Controller
 
         $cotizacion->delete();
 
-        // bitacora
-        // $descripcion = 'Se elimino la cotizacion con ID: '.$cotizacion->id;
-        // registrarBitacora($descripcion);
-
         return response()->json([
             'status' => true,
             'message' => 'Cotizacion eliminada satisfactoriamente',
