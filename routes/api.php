@@ -4,6 +4,7 @@ use App\Http\Controllers\auth\JWTController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\EmpleadoController;
+use App\Http\Controllers\EstadoVehiculoController;
 use App\Http\Controllers\InventarioController;
 use App\Http\Controllers\MarcaController;
 use App\Http\Controllers\ModeloController;
@@ -122,6 +123,12 @@ Route::post('/diagnosticos', [DiagnosticoController::class, 'store']);
 Route::get('/diagnosticos/{id}', [DiagnosticoController::class, 'show']);
 Route::put('/diagnosticos/{id}', [DiagnosticoController::class, 'update']);
 Route::delete('/diagnosticos/{id}', [DiagnosticoController::class, 'destroy']);
+
+Route::get('/EstadoVehiculo', [EstadoVehiculoController::class, 'index']);
+Route::post('/EstadoVehiculo', [EstadoVehiculoController::class, 'store']);
+Route::get('/EstadoVehiculo/{id}', [EstadoVehiculoController::class, 'show']);
+Route::put('/EstadoVehiculo/{id}', [EstadoVehiculoController::class, 'update']);
+Route::delete('/EstadoVehiculo/{id}', [EstadoVehiculoController::class, 'destroy']);
 
 Route::get('/proveedores', [ProveedorController::class, 'index']);
 Route::post('/proveedores', [ProveedorController::class, 'store']);
