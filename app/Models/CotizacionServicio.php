@@ -18,4 +18,5 @@ class CotizacionServicio extends Model
         'servicio_id',
     ];
 
+    
 }

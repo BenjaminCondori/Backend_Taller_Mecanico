@@ -258,4 +258,5 @@ class CotizacionController extends Controller
             'cotiServicio' => $cotiServicio
         ]);
     }
+    
 }

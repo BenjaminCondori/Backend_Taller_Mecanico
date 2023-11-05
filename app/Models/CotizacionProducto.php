@@ -18,4 +18,5 @@ class CotizacionProducto extends Model
         'producto_id',
     ];
 
+    
 }
