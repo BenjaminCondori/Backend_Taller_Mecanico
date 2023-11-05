@@ -167,3 +167,4 @@ Route::post('/cotizacion_producto', [CotizacionController::class, 'storeProducto
 Route::post('/cotizacion_servicio', [CotizacionController::class, 'storeServicios']);
 Route::delete('/cotizacion_producto/{id}', [CotizacionController::class, 'destroyProductos']);
 Route::delete('/cotizacion_servicio/{id}', [CotizacionController::class, 'destroyServicios']);
+
