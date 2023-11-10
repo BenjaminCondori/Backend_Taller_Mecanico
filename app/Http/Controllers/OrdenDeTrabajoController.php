@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\OrdenDeTrabajo;
 use Illuminate\Http\Request;
 
 class OrdenDeTrabajoController extends Controller
@@ -11,7 +12,8 @@ class OrdenDeTrabajoController extends Controller
      */
     public function index()
     {
-        //
+        $ordenTrabajo = OrdenDeTrabajo::all();
+        return response()->json($ordenTrabajo);
     }
 
     /**
@@ -27,7 +29,13 @@ class OrdenDeTrabajoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $ordenDeTrabajo = OrdenDeTrabajo::create($request->all());
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Orden de trabajo creada satisfactoriamente',
+            'ordenDeTrabajo' => $ordenDeTrabajo
+        ], 201);
     }
 
     /**
@@ -35,7 +43,16 @@ class OrdenDeTrabajoController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $ordenDeTrabajo = OrdenDeTrabajo::find($id);
+
+        if (!$ordenDeTrabajo) {
+            return response()->json([
+                'status' => false,
+                'error' => 'No se encontró el orden de trabajo',
+            ], 404);
+        }
+
+        return response()->json($ordenDeTrabajo);
     }
 
     /**
@@ -51,7 +68,22 @@ class OrdenDeTrabajoController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $ordenDeTrabajo = OrdenDeTrabajo::find($id);
+
+        if (!$ordenDeTrabajo) {
+            return response()->json([
+                'status' => false,
+                'error' => 'No se encontró el orden de trabajo',
+            ], 404);
+        }
+
+        $ordenDeTrabajo->update($request->all());
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Orden de trabajo actualizada satisfactoriamente',
+            'ordenDeTrabajo' => $ordenDeTrabajo
+        ], 200);
     }
 
     /**
@@ -59,6 +91,21 @@ class OrdenDeTrabajoController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $ordenDeTrabajo = OrdenDeTrabajo::find($id);
+
+        if (!$ordenDeTrabajo) {
+            return response()->json([
+                'status' => false,
+                'error' => 'No se encontró el orden de trabajo',
+            ], 404);
+        }
+
+        $ordenDeTrabajo->delete();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Orden de trabajo eliminada satisfactoriamente',
+            'ordenDeTrabajo' => $ordenDeTrabajo,
+        ]);
     }
 }
