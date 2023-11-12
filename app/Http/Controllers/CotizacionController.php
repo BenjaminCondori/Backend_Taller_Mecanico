@@ -18,14 +18,16 @@ class CotizacionController extends Controller
      */
     public function index()
     {
-        $cotizacion = Cotizacion::all();
+        $cotizacion = Cotizacion::with('cliente', 'vehiculo')->get();
         return response()->json($cotizacion);
     }
+
     public function indexProductos()
     {
         $cotiProductos = CotizacionProducto::all();
         return response()->json($cotiProductos);
     }
+
     public function indexServicios()
     {
         $cotiServicios = CotizacionServicio::all();
@@ -53,10 +55,6 @@ class CotizacionController extends Controller
             'vehiculo_id' => $request->vehiculo,
         ]);
 
-        // bitacora
-        // $descripcion = 'Se creó una nueva cotizacion con ID: '.$cotizacion->id;
-        // registrarBitacora($descripcion);*/
-
         return response()->json([
             'status' => true,
             'message' => 'Cotizacion creada satisfactoriamente',
@@ -73,10 +71,6 @@ class CotizacionController extends Controller
             'producto_id' => $request->producto_id,
         ]);
 
-        // bitacora
-        // $descripcion = 'Se creó una nueva producto con ID: '.$producto->id;
-        // registrarBitacora($descripcion);*/
-
         return response()->json([
             'status' => true,
             'message' => 'Cotizacion Producto creada satisfactoriamente',
@@ -92,10 +86,6 @@ class CotizacionController extends Controller
             'cotizacion_id' => $request->cotizacion_id,
             'servicio_id' => $request->servicio_id,
         ]);
-
-        // bitacora
-        // $descripcion = 'Se creó una nueva servicio con ID: '.$servicio->id;
-        // registrarBitacora($descripcion);*/
 
         return response()->json([
             'status' => true,
@@ -258,5 +248,5 @@ class CotizacionController extends Controller
             'cotiServicio' => $cotiServicio
         ]);
     }
-    
+
 }
