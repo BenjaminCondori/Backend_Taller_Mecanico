@@ -100,4 +100,10 @@ class VehiculoController extends Controller
             'vehiculo' => $vehiculo,
         ], 200);
     }
+    public function vehiculosPorCliente($idCliente)
+{
+    $vehiculos = Vehiculo::where('cliente_id', $idCliente)->get();
+    return response()->json($vehiculos);
+}
+
 }

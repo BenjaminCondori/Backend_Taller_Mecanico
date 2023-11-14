@@ -184,5 +184,12 @@ Route::delete('/orden-trabajos/{id}', [OrdenDeTrabajoController::class, 'destroy
 
 Route::delete('/orden-trabajos/{id}', [OrdenDeTrabajoController::class, 'destroy']);
 
+//Rutas para la parte movil
+Route::get('/clientes/{idUsuario}/datos', [ClienteController::class, 'datosCliente']);
+Route::get('/vehiculos/{idCliente}/autos', [VehiculoController::class, 'vehiculosPorCliente']);
+Route::get('/estado_vehiculo/{idVehiculo}/estados', [EstadoVehiculoController::class, 'estadoPorVehiculo']);
+
+
+
 
 

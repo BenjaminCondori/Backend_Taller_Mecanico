@@ -17,6 +17,22 @@ class ClienteController extends Controller
         return response()->json($clientes);
     }
 
+    public function datosCliente($idUsuario)
+    {
+        try {
+            $cliente = Cliente::where('usuario_id', $idUsuario)->first();
+            
+            if (!$cliente) {
+                return response()->json(['status' => false, 'error' => 'Cliente no encontrado'], 404);
+            }
+    
+            return response()->json(['status' => true, 'data' => $cliente], 200);
+        } catch (\Exception $e) {
+            return response()->json(['status' => false, 'error' => 'Error al obtener información del cliente'], 500);
+        }
+    }
+
+
 
     public function create()
     {
