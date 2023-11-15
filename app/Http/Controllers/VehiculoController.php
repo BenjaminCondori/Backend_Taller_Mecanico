@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Vehiculo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class VehiculoController extends Controller
 {
@@ -101,9 +102,22 @@ class VehiculoController extends Controller
         ], 200);
     }
     public function vehiculosPorCliente($idCliente)
-{
-    $vehiculos = Vehiculo::where('cliente_id', $idCliente)->get();
-    return response()->json($vehiculos);
-}
+    {
+        $vehiculos = DB::table('vehiculos')
+            ->where('cliente_id', $idCliente)
+            ->join('modelos', 'vehiculos.modelo_id', '=', 'modelos.id')
+            ->join('marcas', 'vehiculos.marca_id', '=', 'marcas.id')
+            ->join('tipo_vehiculos', 'vehiculos.tipo_vehiculo_id', '=', 'tipo_vehiculos.id')
+            ->select(
+                'vehiculos.*',
+                'modelos.nombre as modelo_nombre',
+                'marcas.nombre as marca_nombre',
+                'tipo_vehiculos.nombre as tipoVehiculo_nombre'
+            )
+            ->get();
+    
+        return response()->json($vehiculos);
+    }
+    
 
 }
