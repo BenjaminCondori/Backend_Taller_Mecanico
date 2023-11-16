@@ -18,37 +18,46 @@ class Vehiculo extends Model
         'nro_chasis',
         'año',
         'color',
+        'kilometraje',
+        'combustible',
         'marca_id',
         'modelo_id',
         'cliente_id',
         'tipo_vehiculo_id',
     ];
 
-    public function marca(): BelongsTo {
+    public function marca(): BelongsTo
+    {
         return $this->belongsTo(Marca::class, 'marca_id');
     }
 
-    public function modelo(): BelongsTo {
+    public function modelo(): BelongsTo
+    {
         return $this->belongsTo(Modelo::class, 'modelo_id');
     }
 
-    public function cliente(): BelongsTo {
+    public function cliente(): BelongsTo
+    {
         return $this->belongsTo(Cliente::class, 'cliente_id');
     }
 
-    public function tipoVehiculo(): BelongsTo {
+    public function tipoVehiculo(): BelongsTo
+    {
         return $this->belongsTo(TipoVehiculo::class, 'tipo_vehiculo_id');
     }
 
-    public function estadosVehiculo(): HasMany {
+    public function estadosVehiculo(): HasMany
+    {
         return $this->hasMany(EstadoVehiculo::class, 'vehiculo_id');
     }
 
-    public function diagnosticos(): HasMany {
+    public function diagnosticos(): HasMany
+    {
         return $this->hasMany(Diagnostico::class, 'vehiculo_id');
     }
 
-    public function cotizaciones(): HasMany {
+    public function cotizaciones(): HasMany
+    {
         return $this->hasMany(Cotizacion::class, 'vehiculo_id');
     }
 
