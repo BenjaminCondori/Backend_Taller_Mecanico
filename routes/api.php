@@ -22,6 +22,8 @@ use App\Http\Controllers\RolController;
 use App\Http\Controllers\ServicioController;
 use App\Http\Controllers\OrdenDeTrabajoController;
 use App\Http\Controllers\PagoController;
+use App\Http\Controllers\ReporteOrdenTrabajoController;
+use App\Http\Controllers\ReporteCotizacionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -192,6 +194,15 @@ Route::get('/pagos/{id}', [PagoController::class, 'show']);
 Route::put('/pagos/{id}', [PagoController::class, 'update']);
 Route::delete('/pagos/{id}', [PagoController::class, 'destroy']);
 Route::get('/pagos-cliente/{clienteId}', [PagoController::class, 'getPagos']);
+
+
+// REPORTES DE ORDEN DE TRABAJO
+Route::get('/reportes-orden-trabajos', [ReporteOrdenTrabajoController::class, 'index']);
+Route::post('/reportes-orden-trabajos', [ReporteOrdenTrabajoController::class, 'generarReporte']);
+
+// REPORTES DE COTIZACION
+Route::get('/reportes-cotizacion', [ReporteCotizacionController::class, 'index']);
+Route::post('/reportes-cotizacion', [ReporteCotizacionController::class, 'generarReporte']);
 
 //Rutas para la parte movil
 Route::get('/clientes/{idUsuario}/datos', [ClienteController::class, 'datosCliente']);
