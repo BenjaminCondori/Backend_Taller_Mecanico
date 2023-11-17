@@ -110,4 +110,11 @@ class EstadoVehiculoController extends Controller
             'estadoVehiculo' => $estadoVehiculo
         ], 200);
     }
+    //funcion para movil
+public function estadoPorVehiculo($idVehiculo)
+{
+    $estadosVehiculo = EstadoVehiculo::where('vehiculo_id', $idVehiculo)->get();
+    return response()->json($estadosVehiculo);
+}
+
 }
