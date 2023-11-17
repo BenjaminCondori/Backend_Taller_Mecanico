@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cliente;
 use App\Models\OrdenDeTrabajo;
 use Illuminate\Http\Request;
 
@@ -40,6 +41,29 @@ class OrdenDeTrabajoController extends Controller
             'message' => 'Orden de trabajo creada satisfactoriamente',
             'ordenDeTrabajo' => $ordenDeTrabajo
         ], 201);
+    }
+
+
+    public function getOrdenes(string $clienteId) {
+        $cliente = Cliente::find($clienteId);
+
+        if (!$cliente) {
+            return response()->json([
+                'status' => false,
+                'error' => 'Cliente no encontrado'
+            ], 404);
+        }
+
+        $ordenes = OrdenDeTrabajo::whereHas('cotizacion', function ($query) use ($clienteId) {
+            $query->where('cliente_id', $clienteId);
+        })
+        ->with(['empleado'])
+        ->get();
+
+        return response()->json([
+            'status' => true,
+            'ordenes' => $ordenes,
+        ], 200);
     }
 
     /**

@@ -20,7 +20,7 @@ class PagoController extends Controller
 
     public function create()
     {
-
+        
     }
 
 
