@@ -16,7 +16,7 @@ return new class extends Migration
             $table->dateTime('fecha');
             $table->float('monto');
             $table->text('descripcion');
-            $table->unsignedBigInteger('factura_id');
+            $table->unsignedBigInteger('factura_id')->nullable();
             $table->foreign('factura_id')->references('id')->on('facturas')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });

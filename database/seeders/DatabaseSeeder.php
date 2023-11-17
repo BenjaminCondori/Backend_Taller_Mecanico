@@ -30,6 +30,12 @@ class DatabaseSeeder extends Seeder
             ServicioSeeder::class,
             ProductoSeeder::class,
             DiagnosticoSeeder::class,
+            CotizacionSeeder::class,
+            CotizacionProductoSeeder::class,
+            CotizacionServicioSeeder::class,
+            FacturaSeeder::class,
+            PagoSeeder::class,
+            OrdenDeTrabajoSeeder::class,
         ]);
     }
 }

@@ -21,6 +21,7 @@ use App\Http\Controllers\PermisoController;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\ServicioController;
 use App\Http\Controllers\OrdenDeTrabajoController;
+use App\Http\Controllers\PagoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -182,6 +183,13 @@ Route::get('/orden-trabajos/{id}', [OrdenDeTrabajoController::class, 'show']);
 Route::put('/orden-trabajos/{id}', [OrdenDeTrabajoController::class, 'update']);
 Route::post('/orden-trabajos/{id}', [OrdenDeTrabajoController::class, 'updateEstado']);
 Route::delete('/orden-trabajos/{id}', [OrdenDeTrabajoController::class, 'destroy']);
+
+Route::get('/pagos', [PagoController::class, 'index']);
+Route::post('/pagos', [PagoController::class, 'store']);
+Route::get('/pagos/{id}', [PagoController::class, 'show']);
+Route::put('/pagos/{id}', [PagoController::class, 'update']);
+Route::delete('/pagos/{id}', [PagoController::class, 'destroy']);
+Route::get('/pagos-cliente/{clienteId}', [PagoController::class, 'getPagos']);
 
 //Rutas para la parte movil
 Route::get('/clientes/{idUsuario}/datos', [ClienteController::class, 'datosCliente']);
