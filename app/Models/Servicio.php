@@ -18,6 +18,7 @@ class Servicio extends Model
         'nombre',
         'descripcion',
         'precio',
+        'duracion',
         'categoria_id',
     ];
 

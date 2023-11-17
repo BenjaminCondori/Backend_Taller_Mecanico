@@ -14,6 +14,13 @@ class ServicioSeeder extends Seeder
     public function run(): void
     {
         Servicio::create([
+            'nombre' => 'Diagnostico',
+            'descripcion' => 'Se revisara el vehiculo a detalle.',
+            'precio' => 100.00,
+            'time' => '00:30:00',
+            'categoria_id' => 7,
+        ]);
+        Servicio::create([
             'nombre' => 'Cambio de aceite y filtros',
             'descripcion' => 'Incluye el cambio de aceite del motor y los filtros de aceite y aire.',
             'precio' => 50.00,
