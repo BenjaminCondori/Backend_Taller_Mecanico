@@ -16,6 +16,8 @@ return new class extends Migration
             $table->text('descripcion');
             $table->dateTime('fecha');
             $table->decimal('precio', 10, 2);
+            $table->unsignedBigInteger('empleado_id');
+            $table->foreign('empleado_id')->references('id')->on('empleados')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('cliente_id');
             $table->foreign('cliente_id')->references('id')->on('clientes')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('vehiculo_id');

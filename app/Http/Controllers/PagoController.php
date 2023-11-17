@@ -10,7 +10,10 @@ class PagoController extends Controller
 {
     public function index()
     {
-        $pagos = Pago::with('factura')->get();
+        $pagos = Pago::with(
+            'factura',
+            'ordenDeTrabajo.cotizacion.cliente'
+        )->get();
         return response()->json($pagos);
     }
 
@@ -62,7 +65,10 @@ class PagoController extends Controller
 
     public function show(string $id)
     {
-        $pago = Pago::with('factura')->find($id);
+        $pago = Pago::with(
+            'factura',
+            'ordenDeTrabajo.cotizacion.cliente'
+        )->find($id);
 
         if (!$pago) {
             return response()->json([

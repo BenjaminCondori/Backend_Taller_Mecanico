@@ -18,6 +18,7 @@ class CotizacionSeeder extends Seeder
             'precio' => 950,
             'descripcion' => 'Cotizacion de prueba',
             'cliente_id' => 1,
+            'empleado_id' => 1,
             'vehiculo_id' => 1,
         ]);
 
@@ -26,6 +27,7 @@ class CotizacionSeeder extends Seeder
             'precio' => 275,
             'descripcion' => 'Descipción de la cotización',
             'cliente_id' => 1,
+            'empleado_id' => 1,
             'vehiculo_id' => 2,
         ]);
 
@@ -34,6 +36,7 @@ class CotizacionSeeder extends Seeder
             'precio' => 170,
             'descripcion' => 'Descipción de la cotización',
             'cliente_id' => 2,
+            'empleado_id' => 1,
             'vehiculo_id' => 3,
         ]);
 
@@ -42,6 +45,7 @@ class CotizacionSeeder extends Seeder
             'precio' => 120,
             'descripcion' => 'Descipción de la cotización',
             'cliente_id' => 3,
+            'empleado_id' => 1,
             'vehiculo_id' => 4,
         ]);
 
@@ -50,6 +54,7 @@ class CotizacionSeeder extends Seeder
             'precio' => 170,
             'descripcion' => 'Descipción de la cotización',
             'cliente_id' => 3,
+            'empleado_id' => 1,
             'vehiculo_id' => 5,
         ]);
 
@@ -58,6 +63,7 @@ class CotizacionSeeder extends Seeder
             'precio' => 770,
             'descripcion' => 'Descipción de la cotización',
             'cliente_id' => 4,
+            'empleado_id' => 1,
             'vehiculo_id' => 6,
         ]);
     }

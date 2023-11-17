@@ -16,6 +16,7 @@ class PagoSeeder extends Seeder
         Pago::create([
             'fecha' => '2023-11-05 10:31:00',
             'monto' => 855,
+            'estado' => true,
             'descripcion' => 'Pago de orden de trabajo',
             'factura_id' => 1,
         ]);
@@ -23,6 +24,7 @@ class PagoSeeder extends Seeder
         Pago::create([
             'fecha' => '2023-11-15 14:05:17',
             'monto' => 275,
+            'estado' => true,
             'descripcion' => 'Pago de orden de trabajo',
             'factura_id' => 2,
         ]);
@@ -30,6 +32,7 @@ class PagoSeeder extends Seeder
         Pago::create([
             'fecha' => '2023-11-08 10:30:00',
             'monto' => 170,
+            'estado' => true,
             'descripcion' => 'Pago de orden de trabajo',
             'factura_id' => 3,
         ]);
@@ -37,6 +40,7 @@ class PagoSeeder extends Seeder
         Pago::create([
             'fecha' => '2023-11-17 13:45:20',
             'monto' => 120,
+            'estado' => true,
             'descripcion' => 'Pago de orden de trabajo',
             'factura_id' => 4,
         ]);
@@ -44,6 +48,7 @@ class PagoSeeder extends Seeder
         Pago::create([
             'fecha' => '2023-11-20 15:15:10',
             'monto' => 170,
+            'estado' => true,
             'descripcion' => 'Pago de orden de trabajo',
             'factura_id' => 5,
         ]);
@@ -51,6 +56,7 @@ class PagoSeeder extends Seeder
         Pago::create([
             'fecha' => '2023-11-08 11:37:00',
             'monto' => 654.5,
+            'estado' => true,
             'descripcion' => 'Pago de orden de trabajo',
             'factura_id' => 6,
         ]);

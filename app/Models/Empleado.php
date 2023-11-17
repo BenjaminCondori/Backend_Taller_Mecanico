@@ -31,13 +31,17 @@ class Empleado extends Model
     public function puesto(): BelongsTo {
         return $this->belongsTo(Puesto::class, 'puesto_id');
     }
-    
+
     public function reservas(): HasMany {
         return $this->hasMany(Reserva::class, 'empleado_id');
     }
-    
+
     public function ordenesDeTrabajo(): HasMany {
         return $this->hasMany(OrdenDeTrabajo::class, 'empleado_id');
+    }
+
+    public function cotizaciones(): HasMany {
+        return $this->hasMany(Cotizacion::class, 'empleado_id');
     }
 
 }
