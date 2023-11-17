@@ -18,8 +18,10 @@ use App\Http\Controllers\DiagnosticoController;
 use App\Http\Controllers\BitacoraController;
 use App\Http\Controllers\CotizacionController;
 use App\Http\Controllers\PermisoController;
+use App\Http\Controllers\ReservaController;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\ServicioController;
+use App\Models\Reserva;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -174,4 +176,10 @@ Route::post('/cotizacion_producto', [CotizacionController::class, 'storeProducto
 Route::post('/cotizacion_servicio', [CotizacionController::class, 'storeServicios']);
 Route::delete('/cotizacion_producto/{id}', [CotizacionController::class, 'destroyProductos']);
 Route::delete('/cotizacion_servicio/{id}', [CotizacionController::class, 'destroyServicios']);
+
+Route::get  ('/reservas', [ReservaController::class, 'index']);
+Route::post ('/reservas', [ReservaController::class, 'store']);
+Route::get  ('/reservas/{id}', [ReservaController::class, 'show']);
+Route::put  ('/reservas/{id}', [ReservaController::class, 'update']);
+Route::delete   ('/reservas/{id}', [ReservaController::class, 'destroy']);
 

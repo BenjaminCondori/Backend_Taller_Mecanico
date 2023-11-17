@@ -30,6 +30,8 @@ class DatabaseSeeder extends Seeder
             ServicioSeeder::class,
             ProductoSeeder::class,
             DiagnosticoSeeder::class,
+            
+            ReservaSeeder::class,
         ]);
     }
 }
