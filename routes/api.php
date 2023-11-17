@@ -185,6 +185,7 @@ Route::put('/orden-trabajos/{id}', [OrdenDeTrabajoController::class, 'update']);
 Route::post('/orden-trabajos/{id}', [OrdenDeTrabajoController::class, 'updateEstado']);
 Route::delete('/orden-trabajos/{id}', [OrdenDeTrabajoController::class, 'destroy']);
 
+
 Route::get('/pagos', [PagoController::class, 'index']);
 Route::post('/pagos', [PagoController::class, 'store']);
 Route::get('/pagos/{id}', [PagoController::class, 'show']);

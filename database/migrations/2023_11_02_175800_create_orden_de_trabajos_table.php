@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('estado');
             $table->float('descuento');
             $table->float('costo_total');
-            $table->unsignedBigInteger('empleado_id');
-            $table->foreign('empleado_id')->references('id')->on('empleados')->onDelete('cascade')->onUpdate('cascade');
+            $table->unsignedBigInteger('mecanico_id');
+            $table->foreign('mecanico_id')->references('id')->on('empleados')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('cotizacion_id');
             $table->foreign('cotizacion_id')->references('id')->on('cotizaciones')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('pago_id')->nullable();

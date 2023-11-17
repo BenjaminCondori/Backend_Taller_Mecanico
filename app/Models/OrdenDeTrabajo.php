@@ -20,7 +20,7 @@ class OrdenDeTrabajo extends Model
         'estado',
         'descuento',
         'costo_total',
-        'empleado_id',
+        'mecanico_id',
         'cotizacion_id',
         'pago_id',
     ];

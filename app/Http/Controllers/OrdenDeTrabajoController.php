@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cliente;
+use App\Models\Cotizacion;
 use App\Models\OrdenDeTrabajo;
 use Illuminate\Http\Request;
 
@@ -164,4 +165,5 @@ class OrdenDeTrabajoController extends Controller
             'ordenDeTrabajo' => $ordenDeTrabajo,
         ]);
     }
+
 }
