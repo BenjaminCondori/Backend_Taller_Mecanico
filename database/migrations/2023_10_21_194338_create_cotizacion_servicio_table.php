@@ -16,7 +16,7 @@ return new class extends Migration
             $table->integer('servicio_cantidad');
             $table->decimal('servicio_preciototal', 10, 2);
             $table->unsignedBigInteger('cotizacion_id');
-            $table->foreign('cotizacion_id')->references('id')->on('cotizaciones');
+            $table->foreign('cotizacion_id')->references('id')->on('cotizaciones')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('servicio_id');
             $table->foreign('servicio_id')->references('id')->on('servicios')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();

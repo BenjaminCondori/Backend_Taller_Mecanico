@@ -27,6 +27,10 @@ class ProductoController extends Controller
     {
         $producto = Producto::create($request->all());
 
+        // $producto = Producto::create(
+
+        // );
+
         return response()->json([
             'status' => true,
             'message' => 'Producto creado satisfactoriamente',

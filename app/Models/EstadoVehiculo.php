@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class EstadoVehiculo extends Model
 {
@@ -21,6 +22,10 @@ class EstadoVehiculo extends Model
 
     public function vehiculo(): BelongsTo {
         return $this->belongsTo(Vehiculo::class, 'vehiculo_id');
+    }
+
+    public function imagenes(): BelongsToMany {
+        return $this->belongsToMany(Imagen::class, 'vehiculo:id');
     }
 
 }
