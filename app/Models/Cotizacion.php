@@ -27,17 +27,19 @@ class Cotizacion extends Model
     }
 
     public function servicios(): BelongsToMany {
-        return $this->belongsToMany(Servicio::class, 'cotizacion_servicio', 'cotizacion_id', 'servicio_id');
+        return $this->belongsToMany(Servicio::class, 'cotizacion_servicio', 'cotizacion_id', 'servicio_id')
+        ->withPivot('servicio_cantidad', 'servicio_preciototal');
     }
 
     public function productos(): BelongsToMany {
-        return $this->belongsToMany(Producto::class, 'cotizacion_producto', 'cotizacion_id', 'producto_id');
+        return $this->belongsToMany(Producto::class, 'cotizacion_producto', 'cotizacion_id', 'producto_id')
+        ->withPivot('producto_cantidad', 'producto_preciototal');
     }
 
     public function vehiculo(): BelongsTo {
         return $this->belongsTo(Vehiculo::class, 'vehiculo_id');
     }
-    
+
     public function ordenDeTrabajo(): HasOne {
         return $this->hasOne(OrdenDeTrabajo::class, 'cotizacion_id');
     }

@@ -12,7 +12,11 @@ class OrdenDeTrabajoController extends Controller
      */
     public function index()
     {
-        $ordenTrabajo = OrdenDeTrabajo::all();
+        $ordenTrabajo = OrdenDeTrabajo::with(
+            'empleado',
+            'cotizacion.cliente',
+            'cotizacion.vehiculo',
+        )->get();
         return response()->json($ordenTrabajo);
     }
 
@@ -43,7 +47,15 @@ class OrdenDeTrabajoController extends Controller
      */
     public function show(string $id)
     {
-        $ordenDeTrabajo = OrdenDeTrabajo::find($id);
+        $ordenDeTrabajo = OrdenDeTrabajo::with(
+            'empleado',
+            'cotizacion.cliente',
+            'cotizacion.vehiculo.marca',
+            'cotizacion.vehiculo.modelo',
+            'cotizacion.vehiculo.tipoVehiculo',
+            'cotizacion.servicios',
+            'cotizacion.productos'
+        )->find($id);
 
         if (!$ordenDeTrabajo) {
             return response()->json([
@@ -78,6 +90,26 @@ class OrdenDeTrabajoController extends Controller
         }
 
         $ordenDeTrabajo->update($request->all());
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Orden de trabajo actualizada satisfactoriamente',
+            'ordenDeTrabajo' => $ordenDeTrabajo
+        ], 200);
+    }
+
+    public function updateEstado(Request $request, string $id)
+    {
+        $ordenDeTrabajo = OrdenDeTrabajo::find($id);
+
+        if (!$ordenDeTrabajo) {
+            return response()->json([
+                'status' => false,
+                'error' => 'No se encontró el orden de trabajo',
+            ], 404);
+        }
+
+        $ordenDeTrabajo->update(['estado' => $request->estado]);
 
         return response()->json([
             'status' => true,

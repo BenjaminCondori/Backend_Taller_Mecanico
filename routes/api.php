@@ -180,8 +180,7 @@ Route::get('/orden-trabajos', [OrdenDeTrabajoController::class, 'index']);
 Route::post('/orden-trabajos', [OrdenDeTrabajoController::class, 'store']);
 Route::get('/orden-trabajos/{id}', [OrdenDeTrabajoController::class, 'show']);
 Route::put('/orden-trabajos/{id}', [OrdenDeTrabajoController::class, 'update']);
-Route::delete('/orden-trabajos/{id}', [OrdenDeTrabajoController::class, 'destroy']);
-
+Route::post('/orden-trabajos/{id}', [OrdenDeTrabajoController::class, 'updateEstado']);
 Route::delete('/orden-trabajos/{id}', [OrdenDeTrabajoController::class, 'destroy']);
 
 

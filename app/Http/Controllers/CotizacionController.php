@@ -18,7 +18,14 @@ class CotizacionController extends Controller
      */
     public function index()
     {
-        $cotizacion = Cotizacion::with('cliente', 'vehiculo')->get();
+        $cotizacion = Cotizacion::with(
+            'cliente',
+            'vehiculo.marca',
+            'vehiculo.modelo',
+            'vehiculo.tipoVehiculo',
+            'productos',
+            'servicios'
+        )->get();
         return response()->json($cotizacion);
     }
 
@@ -109,32 +116,33 @@ class CotizacionController extends Controller
 
         // buscamos la informacion del cliente con el cliente_id que tiene la cotizacion
         $cliente = DB::table('clientes')
-                        ->where('id', $cotizacion->cliente_id)
-                        ->first();
+            ->where('id', $cotizacion->cliente_id)
+            ->first();
 
         // buscamos la informacion del vehiculo con el vehiculo_id que tiene la cotizacion
         $vehiculo = DB::table('vehiculos')
-        ->join('modelos', 'vehiculos.modelo_id', '=', 'modelos.id')
-        ->join('marcas', 'vehiculos.marca_id', '=', 'marcas.id')
-        ->where('vehiculos.id', $cotizacion->vehiculo_id)
-        ->select('vehiculos.*', 'modelos.nombre as modelo_nombre', 'marcas.nombre as marca_nombre')
-        ->first();
+            ->join('modelos', 'vehiculos.modelo_id', '=', 'modelos.id')
+            ->join('marcas', 'vehiculos.marca_id', '=', 'marcas.id')
+            ->join('tipo_vehiculos', 'vehiculos.tipo_vehiculo_id', '=', 'tipo_vehiculos.id')
+            ->where('vehiculos.id', $cotizacion->vehiculo_id)
+            ->select('vehiculos.*', 'modelos.nombre as modelo_nombre', 'marcas.nombre as marca_nombre', 'tipo_vehiculos.nombre as tipo_vehiculo_nombre')
+            ->first();
 
         // se obtiene todos los productos que estan relaizionados con el id que tiene la corizacion
         $productos = DB::table('cotizacion_producto as cp')
-                        ->join('cotizaciones', 'cotizaciones.id', '=', 'cp.cotizacion_id')
-                        ->join('productos', 'cp.producto_id','=', 'productos.id')
-                        ->select('cp.*', 'productos.nombre as producto_nombre', 'productos.precio_venta as producto_precio')
-                        ->where('cp.cotizacion_id', $cotizacion->id)
-                        ->get();
+            ->join('cotizaciones', 'cotizaciones.id', '=', 'cp.cotizacion_id')
+            ->join('productos', 'cp.producto_id', '=', 'productos.id')
+            ->select('cp.*', 'productos.nombre as producto_nombre', 'productos.precio_venta as producto_precio')
+            ->where('cp.cotizacion_id', $cotizacion->id)
+            ->get();
 
         // se obtiene todos los servicios que estan relacionados con el id que tiene la cotizacion
         $servicios = DB::table('cotizacion_servicio as cs')
-                        ->join('cotizaciones', 'cotizaciones.id', '=', 'cs.cotizacion_id')
-                        ->join('servicios', 'cs.servicio_id','=', 'servicios.id')
-                        ->select('cs.*', 'servicios.nombre as servicio_nombre', 'servicios.precio as servicio_precio')
-                        ->where('cs.cotizacion_id', $cotizacion->id)
-                        ->get();
+            ->join('cotizaciones', 'cotizaciones.id', '=', 'cs.cotizacion_id')
+            ->join('servicios', 'cs.servicio_id', '=', 'servicios.id')
+            ->select('cs.*', 'servicios.nombre as servicio_nombre', 'servicios.precio as servicio_precio')
+            ->where('cs.cotizacion_id', $cotizacion->id)
+            ->get();
 
         return response()->json([
             'cotizacion' => $cotizacion,
@@ -188,11 +196,11 @@ class CotizacionController extends Controller
                 'error' => 'No se encontró la cotizacion',
             ], 404);
         }
-            // Elimina primero los registros relacionados en cotizacion_producto
-    CotizacionProducto::where('cotizacion_id', $id)->delete();
+        // Elimina primero los registros relacionados en cotizacion_producto
+        CotizacionProducto::where('cotizacion_id', $id)->delete();
 
-    // Luego, elimina los registros relacionados en cotizacion_servicio
-    CotizacionServicio::where('cotizacion_id', $id)->delete();
+        // Luego, elimina los registros relacionados en cotizacion_servicio
+        CotizacionServicio::where('cotizacion_id', $id)->delete();
 
         $cotizacion->delete();
 
@@ -202,6 +210,7 @@ class CotizacionController extends Controller
             'cotizacion' => $cotizacion
         ]);
     }
+
     public function destroyProductos(string $id)
     {
         $cotiProducto = CotizacionProducto::find($id);
@@ -215,16 +224,13 @@ class CotizacionController extends Controller
 
         $cotiProducto->delete();
 
-        // bitacora
-        // $descripcion = 'Se elimino la cotizacion con ID: '.$cotizacion->id;
-        // registrarBitacora($descripcion);
-
         return response()->json([
             'status' => true,
             'message' => 'Cotizacion eliminada satisfactoriamente',
             'cotiProducto' => $cotiProducto
         ]);
     }
+
     public function destroyServicios(string $id)
     {
         $cotiServicio = CotizacionServicio::find($id);
@@ -238,15 +244,10 @@ class CotizacionController extends Controller
 
         $cotiServicio->delete();
 
-        // bitacora
-        // $descripcion = 'Se elimino la cotizacion con ID: '.$cotizacion->id;
-        // registrarBitacora($descripcion);
-
         return response()->json([
             'status' => true,
             'message' => 'Cotizacion eliminada satisfactoriamente',
             'cotiServicio' => $cotiServicio
         ]);
     }
-
 }
