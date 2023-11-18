@@ -18,6 +18,7 @@ use App\Http\Controllers\DiagnosticoController;
 use App\Http\Controllers\BitacoraController;
 use App\Http\Controllers\CotizacionController;
 use App\Http\Controllers\PermisoController;
+use App\Http\Controllers\ReservaController;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\ServicioController;
 use App\Http\Controllers\OrdenDeTrabajoController;
@@ -209,7 +210,9 @@ Route::get('/clientes/{idUsuario}/datos', [ClienteController::class, 'datosClien
 Route::get('/vehiculos/{idCliente}/autos', [VehiculoController::class, 'vehiculosPorCliente']);
 Route::get('/estado_vehiculo/{idVehiculo}/estados', [EstadoVehiculoController::class, 'estadoPorVehiculo']);
 
-
-
-
+Route::get  ('/reservas', [ReservaController::class, 'index']);
+Route::post ('/reservas', [ReservaController::class, 'store']);
+Route::get  ('/reservas/{id}', [ReservaController::class, 'show']);
+Route::put  ('/reservas/{id}', [ReservaController::class, 'update']);
+Route::delete   ('/reservas/{id}', [ReservaController::class, 'destroy']);
 

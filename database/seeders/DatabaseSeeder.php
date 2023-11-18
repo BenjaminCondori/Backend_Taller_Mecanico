@@ -36,6 +36,7 @@ class DatabaseSeeder extends Seeder
             FacturaSeeder::class,
             PagoSeeder::class,
             OrdenDeTrabajoSeeder::class,
+            ReservaSeeder::class,
         ]);
     }
 }

@@ -14,8 +14,10 @@ class Reserva extends Model
     
     protected $fillable = [
         'fecha',
-        'hora',
+        'hora_inicio',
+        'hora_fin',
         'estado',
+        'servicio_id',
         'cliente_id',
         'empleado_id',
     ];
@@ -28,6 +30,11 @@ class Reserva extends Model
     public function empleado(): BelongsTo
     {
         return $this->belongsTo(Empleado::class, 'empleado_id');
+    }
+    
+    public function servicio(): BelongsTo
+    {
+        return $this->belongsTo(Servicio::class, 'servicio_id');
     }
     
 }
