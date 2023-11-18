@@ -24,6 +24,7 @@ use App\Http\Controllers\OrdenDeTrabajoController;
 use App\Http\Controllers\PagoController;
 use App\Http\Controllers\ReporteOrdenTrabajoController;
 use App\Http\Controllers\ReporteCotizacionController;
+use App\Http\Controllers\ReportePagoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -203,6 +204,11 @@ Route::post('/reportes-orden-trabajos', [ReporteOrdenTrabajoController::class, '
 // REPORTES DE COTIZACION
 Route::get('/reportes-cotizacion', [ReporteCotizacionController::class, 'index']);
 Route::post('/reportes-cotizacion', [ReporteCotizacionController::class, 'generarReporte']);
+
+
+// REPORTES DE PAGO
+Route::get('/reportes-pagos', [ReportePagoController::class, 'index']);
+Route::post('/reportes-pagos', [ReportePagoController::class, 'generarReporte']);
 
 //Rutas para la parte movil
 Route::get('/clientes/{idUsuario}/datos', [ClienteController::class, 'datosCliente']);
