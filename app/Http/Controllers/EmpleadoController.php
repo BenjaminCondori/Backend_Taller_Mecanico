@@ -11,7 +11,7 @@ class EmpleadoController extends Controller
 {
     public function index()
     {
-        $empleados = Empleado::all();
+        $empleados = Empleado::with('usuario.rol')->get();
         return response()->json($empleados);
     }
 

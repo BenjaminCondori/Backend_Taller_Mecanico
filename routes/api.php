@@ -21,7 +21,10 @@ use App\Http\Controllers\PermisoController;
 use App\Http\Controllers\ReservaController;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\ServicioController;
-use App\Models\Reserva;
+use App\Http\Controllers\OrdenDeTrabajoController;
+use App\Http\Controllers\PagoController;
+use App\Http\Controllers\ReporteOrdenTrabajoController;
+use App\Http\Controllers\ReporteCotizacionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -176,6 +179,36 @@ Route::post('/cotizacion_producto', [CotizacionController::class, 'storeProducto
 Route::post('/cotizacion_servicio', [CotizacionController::class, 'storeServicios']);
 Route::delete('/cotizacion_producto/{id}', [CotizacionController::class, 'destroyProductos']);
 Route::delete('/cotizacion_servicio/{id}', [CotizacionController::class, 'destroyServicios']);
+
+Route::get('/orden-trabajos', [OrdenDeTrabajoController::class, 'index']);
+Route::post('/orden-trabajos', [OrdenDeTrabajoController::class, 'store']);
+Route::get('/orden-trabajos/{id}', [OrdenDeTrabajoController::class, 'show']);
+Route::get('/ordenes-cliente/{id}', [OrdenDeTrabajoController::class, 'getOrdenes']);
+Route::put('/orden-trabajos/{id}', [OrdenDeTrabajoController::class, 'update']);
+Route::post('/orden-trabajos/{id}', [OrdenDeTrabajoController::class, 'updateEstado']);
+Route::delete('/orden-trabajos/{id}', [OrdenDeTrabajoController::class, 'destroy']);
+
+
+Route::get('/pagos', [PagoController::class, 'index']);
+Route::post('/pagos', [PagoController::class, 'store']);
+Route::get('/pagos/{id}', [PagoController::class, 'show']);
+Route::put('/pagos/{id}', [PagoController::class, 'update']);
+Route::delete('/pagos/{id}', [PagoController::class, 'destroy']);
+Route::get('/pagos-cliente/{clienteId}', [PagoController::class, 'getPagos']);
+
+
+// REPORTES DE ORDEN DE TRABAJO
+Route::get('/reportes-orden-trabajos', [ReporteOrdenTrabajoController::class, 'index']);
+Route::post('/reportes-orden-trabajos', [ReporteOrdenTrabajoController::class, 'generarReporte']);
+
+// REPORTES DE COTIZACION
+Route::get('/reportes-cotizacion', [ReporteCotizacionController::class, 'index']);
+Route::post('/reportes-cotizacion', [ReporteCotizacionController::class, 'generarReporte']);
+
+//Rutas para la parte movil
+Route::get('/clientes/{idUsuario}/datos', [ClienteController::class, 'datosCliente']);
+Route::get('/vehiculos/{idCliente}/autos', [VehiculoController::class, 'vehiculosPorCliente']);
+Route::get('/estado_vehiculo/{idVehiculo}/estados', [EstadoVehiculoController::class, 'estadoPorVehiculo']);
 
 Route::get  ('/reservas', [ReservaController::class, 'index']);
 Route::post ('/reservas', [ReservaController::class, 'store']);

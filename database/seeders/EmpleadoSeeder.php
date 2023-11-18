@@ -34,5 +34,16 @@ class EmpleadoSeeder extends Seeder
             'usuario_id' => '2',
             'puesto_id' => '3',
         ]);
+
+        Empleado::create([
+            'ci' => '556677',
+            'nombre' => 'Maria',
+            'apellido' => 'Perez',
+            'genero' => 'F',
+            'telefono' => '77889966',
+            'direccion' => 'Calle 3',
+            'usuario_id' => '1',
+            'puesto_id' => '1',
+        ]);
     }
 }
