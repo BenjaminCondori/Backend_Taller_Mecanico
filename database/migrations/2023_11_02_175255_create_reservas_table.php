@@ -21,10 +21,10 @@ return new class extends Migration
             $table->foreign('servicio_id')->references('id')->on('servicios')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('cliente_id');
             $table->foreign('cliente_id')->references('id')->on('clientes')->onDelete('cascade')->onUpdate('cascade');
-            // Un empleado tiene que aprobar la reservacion
-            $table->unsignedBigInteger('empleado_id')->nullable();
-            $table->foreign('empleado_id')->references('id')->on('empleados')->onDelete('cascade')->onUpdate('cascade')->nullable();;
-            $table->timestamps();
+            // El empleado registra las reservas
+            $table->unsignedBigInteger('empleado_id');
+            $table->foreign('empleado_id')->references('id')->on('empleados')->onDelete('cascade')->onUpdate('cascade');
+            $table->timestamps();   
         });
     }
 
