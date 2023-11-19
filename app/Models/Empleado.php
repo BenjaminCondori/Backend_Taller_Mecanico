@@ -37,7 +37,7 @@ class Empleado extends Model
     }
 
     public function ordenesDeTrabajo(): HasMany {
-        return $this->hasMany(OrdenDeTrabajo::class, 'empleado_id');
+        return $this->hasMany(OrdenDeTrabajo::class, 'mecanico_id');
     }
 
     public function cotizaciones(): HasMany {

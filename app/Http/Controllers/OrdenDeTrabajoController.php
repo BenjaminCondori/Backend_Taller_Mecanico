@@ -15,7 +15,8 @@ class OrdenDeTrabajoController extends Controller
     public function index()
     {
         $ordenTrabajo = OrdenDeTrabajo::with(
-            'empleado',
+            'pago',
+            'mecanico',
             'cotizacion.cliente',
             'cotizacion.vehiculo',
         )->get();
@@ -73,7 +74,7 @@ class OrdenDeTrabajoController extends Controller
     public function show(string $id)
     {
         $ordenDeTrabajo = OrdenDeTrabajo::with(
-            'empleado',
+            'mecanico',
             'cotizacion.cliente',
             'cotizacion.vehiculo.marca',
             'cotizacion.vehiculo.modelo',
