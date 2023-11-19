@@ -26,7 +26,22 @@ class CotizacionController extends Controller
             'productos',
             'servicios'
         )->get();
+
         return response()->json($cotizacion);
+    }
+
+    public function getCotizaciones()
+    {
+        $cotizaciones = Cotizacion::doesntHave('ordenDeTrabajo')->with(
+            'cliente',
+            'vehiculo.marca',
+            'vehiculo.modelo',
+            'vehiculo.tipoVehiculo',
+            'productos',
+            'servicios'
+        )->get();
+
+        return response()->json($cotizaciones);
     }
 
     public function indexProductos()
@@ -59,6 +74,7 @@ class CotizacionController extends Controller
             'fecha' => Carbon::now(),
             'precio' => $request->precioTotal,
             'cliente_id' => $request->cliente,
+            'empleado_id' => $request->empleado,
             'vehiculo_id' => $request->vehiculo,
         ]);
 
@@ -68,6 +84,7 @@ class CotizacionController extends Controller
             'cotizacion' => $cotizacion
         ], 201);
     }
+
     public function storeProductos(Request $request)
     {
         // se crea una nueva producto en la cotizacion
@@ -84,6 +101,7 @@ class CotizacionController extends Controller
             'producto' => $producto
         ], 201);
     }
+
     public function storeServicios(Request $request)
     {
         // se crea una nueva servicio en la cotizacion

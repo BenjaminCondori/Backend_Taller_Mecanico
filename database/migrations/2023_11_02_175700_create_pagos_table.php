@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->dateTime('fecha');
             $table->float('monto');
-            $table->text('descripcion');
+            $table->text('concepto');
             $table->boolean('estado')->default(false);
             $table->unsignedBigInteger('factura_id')->nullable();
             $table->foreign('factura_id')->references('id')->on('facturas')->onDelete('cascade')->onUpdate('cascade');

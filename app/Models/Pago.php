@@ -17,7 +17,7 @@ class Pago extends Model
         'fecha',
         'monto',
         'estado',
-        'descripcion',
+        'concepto',
         'factura_id',
     ];
 

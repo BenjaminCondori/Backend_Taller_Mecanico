@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Factura;
 use Illuminate\Http\Request;
 
 class FacturaController extends Controller
@@ -27,7 +28,13 @@ class FacturaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $factura = Factura::create($request->all());
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Factura creada satisfactoriamente',
+            'factura' => $factura
+        ], 201);
     }
 
     /**

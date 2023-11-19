@@ -42,6 +42,8 @@ class CotizacionProductoSeeder extends Seeder
             'producto_id' => 4,
         ]);
 
+        
+
         CotizacionProducto::create([
             'producto_cantidad' => 2,
             'producto_preciototal' => 20,

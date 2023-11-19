@@ -29,13 +29,13 @@ class FacturaSeeder extends Seeder
             'monto_total' => 275,
         ]);
 
-        Factura::create([
-            'fecha_emision' => '2023-11-08 10:30:00',
-            'detalle' => 'Orden de trabajo',
-            'importe' => 200,
-            'saldo' => 30,
-            'monto_total' => 170,
-        ]);
+        // Factura::create([
+        //     'fecha_emision' => '2023-11-08 10:30:00',
+        //     'detalle' => 'Orden de trabajo',
+        //     'importe' => 200,
+        //     'saldo' => 30,
+        //     'monto_total' => 170,
+        // ]);
 
         Factura::create([
             'fecha_emision' => '2023-11-17 13:45:20',

@@ -25,9 +25,9 @@ class OrdenDeTrabajo extends Model
         'pago_id',
     ];
 
-    public function empleado(): BelongsTo
+    public function mecanico(): BelongsTo
     {
-        return $this->belongsTo(Empleado::class, 'empleado_id');
+        return $this->belongsTo(Empleado::class, 'mecanico_id');
     }
 
     public function cotizacion(): BelongsTo

@@ -36,14 +36,14 @@ class CotizacionServicioSeeder extends Seeder
 
 
         CotizacionServicio::create([
-            'servicio_cantidad' => 0,
+            'servicio_cantidad' => 1,
             'servicio_preciototal' => 40,
             'cotizacion_id' => 3,
             'servicio_id' => 3,
         ]);
 
         CotizacionServicio::create([
-            'servicio_cantidad' => 0,
+            'servicio_cantidad' => 1,
             'servicio_preciototal' => 130,
             'cotizacion_id' => 3,
             'servicio_id' => 15,

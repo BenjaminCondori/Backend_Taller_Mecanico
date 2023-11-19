@@ -23,6 +23,7 @@ use App\Http\Controllers\RolController;
 use App\Http\Controllers\ServicioController;
 use App\Http\Controllers\OrdenDeTrabajoController;
 use App\Http\Controllers\PagoController;
+use App\Http\Controllers\FacturaController;
 use App\Http\Controllers\ReporteOrdenTrabajoController;
 use App\Http\Controllers\ReporteCotizacionController;
 use App\Http\Controllers\ReportePagoController;
@@ -170,6 +171,7 @@ Route::get('/bitacoras', [BitacoraController::class, 'index']);
 Route::post('/bitacoras', [BitacoraController::class, 'store']);
 
 Route::get('/cotizaciones', [CotizacionController::class, 'index']);
+Route::get('/obtener-cotizaciones', [CotizacionController::class, 'getCotizaciones']);
 Route::post('/cotizaciones', [CotizacionController::class, 'store']);
 Route::get('/cotizaciones/{id}', [CotizacionController::class, 'show']);
 Route::put('/cotizaciones/{id}', [CotizacionController::class, 'update']);
@@ -196,6 +198,8 @@ Route::get('/pagos/{id}', [PagoController::class, 'show']);
 Route::put('/pagos/{id}', [PagoController::class, 'update']);
 Route::delete('/pagos/{id}', [PagoController::class, 'destroy']);
 Route::get('/pagos-cliente/{clienteId}', [PagoController::class, 'getPagos']);
+
+Route::post('/facturas', [FacturaController::class, 'store']);
 
 
 // REPORTES DE ORDEN DE TRABAJO

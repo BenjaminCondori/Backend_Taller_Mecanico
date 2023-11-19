@@ -12,7 +12,8 @@ class PagoController extends Controller
     {
         $pagos = Pago::with(
             'factura',
-            'ordenDeTrabajo.cotizacion.cliente'
+            'ordenDeTrabajo.cotizacion.cliente',
+            'ordenDeTrabajo.cotizacion.empleado',
         )->get();
         return response()->json($pagos);
     }
@@ -20,7 +21,7 @@ class PagoController extends Controller
 
     public function create()
     {
-        
+
     }
 
 
