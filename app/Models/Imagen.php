@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Imagen extends Model
 {
@@ -17,7 +17,7 @@ class Imagen extends Model
         'vehiculo_id'
     ];
 
-    public function estadoVehiculo(): HasOne {
-        return $this->hasOne(EstadoVehiculo::class, 'imagen_id');
+    public function estadoVehiculo(): BelongsTo {
+        return $this->belongsTo(EstadoVehiculo::class, 'imagen_id');
     }
 }
