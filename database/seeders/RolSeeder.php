@@ -32,5 +32,6 @@ class RolSeeder extends Seeder
             'nombre' => 'Cliente',
             'descripcion' => 'Los clientes son propietarios de vehículos que buscan servicios de reparación, mantenimiento o inspección en el taller automotriz.',
         ]);
+
     }
 }

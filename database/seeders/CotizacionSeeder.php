@@ -54,7 +54,7 @@ class CotizacionSeeder extends Seeder
             'precio' => 170,
             'descripcion' => 'Descipción de la cotización',
             'cliente_id' => 3,
-            'empleado_id' => 1,
+            'empleado_id' => 3,
             'vehiculo_id' => 5,
         ]);
 
@@ -63,7 +63,7 @@ class CotizacionSeeder extends Seeder
             'precio' => 770,
             'descripcion' => 'Descipción de la cotización',
             'cliente_id' => 4,
-            'empleado_id' => 1,
+            'empleado_id' => 4,
             'vehiculo_id' => 6,
         ]);
     }

@@ -19,7 +19,7 @@ class ReservaSeeder extends Seeder
             'hora_fin' => '11:00:00',
             'estado' => 'No aprobado',
             'servicio_id' => '4',
-            'cliente_id' => '2'
+            'csliente_id' => '2'
         ]);
     }
 }

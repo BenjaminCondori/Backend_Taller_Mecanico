@@ -49,5 +49,29 @@ class UsuarioSeeder extends Seeder
             'password' => Hash::make('xyz123'),
             'rol_id' => 4,
         ]);
+
+        Usuario::create([
+            'email' => 'maria@gmail.com',
+            'password' => Hash::make('123456'),
+            'rol_id' => 2,
+        ]);
+
+        Usuario::create([
+            'email' => 'carla@gmail.com',
+            'password' => Hash::make('123456'),
+            'rol_id' => 2,
+        ]);
+
+        Usuario::create([
+            'email' => 'juan@gmail.com',
+            'password' => Hash::make('123456'),
+            'rol_id' => 3,
+        ]);
+
+        Usuario::create([
+            'email' => 'santiago@gmail.com',
+            'password' => Hash::make('123456'),
+            'rol_id' => 3,
+        ]);
     }
 }
