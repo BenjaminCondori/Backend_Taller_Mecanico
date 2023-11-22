@@ -70,7 +70,7 @@ class ReservaController extends Controller
      */
     public function show(string $id)
     {
-        $reserva = Reserva::find($id)->with('servicio','cliente','empleado')->get();
+        $reserva = Reserva::with('servicio','cliente','empleado')->find($id);
 
         if (!$reserva) {
             return response()->json([
