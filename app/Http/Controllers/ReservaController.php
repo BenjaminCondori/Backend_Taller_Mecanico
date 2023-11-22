@@ -103,6 +103,28 @@ class ReservaController extends Controller
                 'error' => 'No se encontró el reserva',
             ], 404);
         }
+        
+        // Verificar conflictos de horarios
+        $conflictos = Reserva::where('id', '!=', $id)
+            ->where('fecha', $request->fecha)
+            ->where(function ($query) use ($request) {
+                $query->where(function ($q) use ($request) {
+                    $q->whereTime('hora_inicio', '>=', $request->hora_inicio)
+                        ->whereTime('hora_inicio', '<', $request->hora_fin);
+                })->orWhere(function ($q) use ($request) {
+                    $q->whereTime('hora_fin', '>', $request->hora_inicio)
+                        ->whereTime('hora_fin', '<=', $request->hora_fin);
+                });
+            })
+            ->exists();
+
+        if ($conflictos) {
+            return response()->json([
+                'status' => false,
+                'error' => 'Modificar la reserva causaria conflictos',
+            ], 404);
+        }
+        // Verificar si hay conflictos con reservas existentes
 
         $reserva->update($request->all());
 
