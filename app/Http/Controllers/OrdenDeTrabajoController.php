@@ -18,6 +18,7 @@ class OrdenDeTrabajoController extends Controller
             'pago',
             'mecanico',
             'cotizacion.cliente',
+            'cotizacion.empleado',
             'cotizacion.vehiculo',
         )->get();
         return response()->json($ordenTrabajo);

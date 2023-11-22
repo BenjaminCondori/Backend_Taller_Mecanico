@@ -24,7 +24,7 @@ class PuestoSeeder extends Seeder
         ]);
 
         Puesto::create([
-            'nombre' => 'Mecanico',
+            'nombre' => 'Mecánico',
             'descripcion' => 'Se encarga de realizar las reparaciones de vehiculos en el taller',
         ]);
     }
