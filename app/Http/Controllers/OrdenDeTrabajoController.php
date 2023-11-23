@@ -60,7 +60,7 @@ class OrdenDeTrabajoController extends Controller
         $ordenes = OrdenDeTrabajo::whereHas('cotizacion', function ($query) use ($clienteId) {
             $query->where('cliente_id', $clienteId);
         })
-        ->with(['empleado'])
+        ->with(['mecanico'])
         ->get();
 
         return response()->json([
