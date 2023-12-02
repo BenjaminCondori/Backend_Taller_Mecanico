@@ -13,7 +13,7 @@ class Venta extends Model
     use HasFactory;
     protected $fillable = [
         'fecha',
-        'precio',
+        'monto',
         'cliente_id',
         'pago_id',
     ];
@@ -22,9 +22,10 @@ class Venta extends Model
         return $this->belongsTo(Cliente::class, 'cliente_id');
     }
 
-    public function pago(): HasOne {
-        return $this->hasOne(Pago::class, 'pago_id');
+    public function pago(): BelongsTo {
+        return $this->belongsTo(Pago::class, 'pago_id');
     }
+    // no se por que pago si funciona asi y no con venta_id wtffffffff
 
     public function productos(): BelongsToMany{
         return $this->belongsToMany(Producto::class, 'venta_producto','venta_id','producto_id')

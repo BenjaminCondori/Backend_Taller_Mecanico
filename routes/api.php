@@ -217,6 +217,7 @@ Route::get('/reportes-pagos', [ReportePagoController::class, 'index']);
 Route::post('/reportes-pagos', [ReportePagoController::class, 'generarReporte']);
 
 //Rutas para la parte movil
+
 Route::get('/clientes/{idUsuario}/datos', [ClienteController::class, 'datosCliente']);
 Route::get('/vehiculos/{idCliente}/autos', [VehiculoController::class, 'vehiculosPorCliente']);
 Route::get('/estado_vehiculo/{idVehiculo}/estados', [EstadoVehiculoController::class, 'estadoPorVehiculo']);
@@ -233,3 +234,6 @@ Route::post('/ventas',[VentaController::class, 'store']);
 Route::get('/ventas/{id}',[VentaController::class,'show']);
 Route::put('/ventas/{id}',[VentaController::class, 'update']);
 Route::delete('/ventas/{id}',[VentaController::class, 'destroy']);
+Route::get('/ventas/{venta}/productos',[VentaController::class,'indexProductos']);
+Route::post('/ventas/{venta}/productos',[VentaController::class,'storeProductos']);
+Route::delete('/ventasproductos/{id}',[VentaController::class,'destroyProductos']);

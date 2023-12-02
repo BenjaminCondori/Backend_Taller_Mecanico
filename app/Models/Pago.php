@@ -30,5 +30,8 @@ class Pago extends Model
     {
         return $this->hasOne(OrdenDeTrabajo::class, 'pago_id');
     }
-
+    
+    public function venta(): HasOne{
+        return $this->hasOne(Venta::class,'venta_id');
+    }
 }
