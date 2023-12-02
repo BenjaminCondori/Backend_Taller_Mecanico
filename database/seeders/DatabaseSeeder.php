@@ -39,7 +39,9 @@ class DatabaseSeeder extends Seeder
             OrdenDeTrabajoSeeder::class,
             ReservaSeeder::class,
             VentaSeeder::class,
-            VentaProductoSeeder::class
+            VentaProductoSeeder::class,
+            NotaCompraSeeder::class,
+            DetalleCompraSeeder::class,
         ]);
     }
 }
