@@ -27,6 +27,7 @@ use App\Http\Controllers\FacturaController;
 use App\Http\Controllers\ReporteOrdenTrabajoController;
 use App\Http\Controllers\ReporteCotizacionController;
 use App\Http\Controllers\ReportePagoController;
+use App\Http\Controllers\VentaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -216,13 +217,23 @@ Route::get('/reportes-pagos', [ReportePagoController::class, 'index']);
 Route::post('/reportes-pagos', [ReportePagoController::class, 'generarReporte']);
 
 //Rutas para la parte movil
+
 Route::get('/clientes/{idUsuario}/datos', [ClienteController::class, 'datosCliente']);
 Route::get('/vehiculos/{idCliente}/autos', [VehiculoController::class, 'vehiculosPorCliente']);
 Route::get('/estado_vehiculo/{idVehiculo}/estados', [EstadoVehiculoController::class, 'estadoPorVehiculo']);
 
-Route::get  ('/reservas', [ReservaController::class, 'index']);
-Route::post ('/reservas', [ReservaController::class, 'store']);
-Route::get  ('/reservas/{id}', [ReservaController::class, 'show']);
-Route::put  ('/reservas/{id}', [ReservaController::class, 'update']);
-Route::delete   ('/reservas/{id}', [ReservaController::class, 'destroy']);
+Route::get('/reservas', [ReservaController::class, 'index']);
+Route::post('/reservas', [ReservaController::class, 'store']);
+Route::get('/reservas/{id}', [ReservaController::class, 'show']);
+Route::put('/reservas/{id}', [ReservaController::class, 'update']);
+Route::delete('/reservas/{id}', [ReservaController::class, 'destroy']);
 
+
+Route::get('/ventas',[VentaController::class, 'index']);
+Route::post('/ventas',[VentaController::class, 'store']);
+Route::get('/ventas/{id}',[VentaController::class,'show']);
+Route::put('/ventas/{id}',[VentaController::class, 'update']);
+Route::delete('/ventas/{id}',[VentaController::class, 'destroy']);
+Route::get('/ventas/{venta}/productos',[VentaController::class,'indexProductos']);
+Route::post('/ventas/{venta}/productos',[VentaController::class,'storeProductos']);
+Route::delete('/ventasproductos/{id}',[VentaController::class,'destroyProductos']);
