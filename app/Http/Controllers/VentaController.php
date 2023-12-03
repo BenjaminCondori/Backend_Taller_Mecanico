@@ -33,7 +33,7 @@ class VentaController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'Venta creada satisfactoriamente',
-            'cotizacion' => $venta
+            'venta' => $venta
         ], 201);
     }
 
