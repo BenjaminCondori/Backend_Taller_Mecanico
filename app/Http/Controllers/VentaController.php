@@ -96,7 +96,7 @@ class VentaController extends Controller
         ], 200);
     }
 
-    public function indexProductos(Venta $venta, Request $request)
+    public function indexProductos(Venta $venta)
     {
         $productos = $venta->productos()->get();
 
@@ -105,7 +105,7 @@ class VentaController extends Controller
 
     public function storeProductos(Venta $venta, Request $request)
     {
-        $producto = VentaProducto::create([
+        $ventaproducto = VentaProducto::create([
             'venta_id' => $venta->id,
             'producto_id' => $request->producto_id,
             'producto_cantidad' => $request->producto_cantidad,
@@ -115,8 +115,32 @@ class VentaController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'Producto insertado en la venta satisfactoriamente',
-            'producto' => $producto
+            'ventaproducto' => $ventaproducto
         ], 201);
+    }
+
+    public function actualizarTotal(Venta $venta)
+    {
+        if (!$venta) {
+            return response()->json([
+                'status' => false,
+                'error' => 'No se encontró la venta'
+            ], 404);
+        }
+
+        $productos = $venta->productos()->get();
+        $monto_total = 0;
+        foreach($productos as $producto){
+            $monto_total = $monto_total + $producto->pivot->producto_preciototal;
+        }
+
+        $venta->update(['monto' => $monto_total]);
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Venta actualizada satisfactoriamente',
+            'venta' => $venta
+        ], 200);
     }
 
     public function destroyProductos(string $id)

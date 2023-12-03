@@ -238,6 +238,7 @@ Route::delete('/ventas/{id}',[VentaController::class, 'destroy']);
 Route::get('/ventas/{venta}/productos',[VentaController::class,'indexProductos']);
 Route::post('/ventas/{venta}/productos',[VentaController::class,'storeProductos']);
 Route::delete('/ventasproductos/{id}',[VentaController::class,'destroyProductos']);
+Route::get('/ventas/{venta}/actualizartotal',[VentaController::class,'actualizarTotal']);
 
 Route::get('/nota_compras', [NotaCompraController::class, 'index']);
 Route::post('/nota_compras', [NotaCompraController::class, 'store']);
