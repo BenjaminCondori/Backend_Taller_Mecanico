@@ -254,4 +254,10 @@ Route::put('/detalle_compras/{id}', [DetalleCompraController::class, 'update']);
 Route::delete('/detalle_compras/{id}', [DetalleCompraController::class, 'destroy']);
 
 Route::get('/solicitudes/{id}', [SolicitudAsistenciaController::class, 'getSolicitudesClienteById']);
+Route::get('/solicitudes', [SolicitudAsistenciaController::class, 'index']);
+Route::get('/solicitudes/{id}', [SolicitudAsistenciaController::class, 'show']);
 Route::post('/solicitudes', [SolicitudAsistenciaController::class, 'store']);
+Route::put('/solicitudes/{id}', [SolicitudAsistenciaController::class, 'update']);
+Route::delete('/solicitudes/{id}', [SolicitudAsistenciaController::class, 'destroy']);
+
+

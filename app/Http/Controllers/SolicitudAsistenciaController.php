@@ -13,7 +13,12 @@ class SolicitudAsistenciaController extends Controller
 {
     public function index()
     {
-        $solicitudes = SolicitudAsistencia::all();
+        $solicitudes = SolicitudAsistencia::with(
+            'cliente',
+            'tecnico',
+            'vehiculo',
+            'servicio'
+        )->get();
         return response()->json($solicitudes, 200);
     }
 
@@ -118,13 +123,26 @@ class SolicitudAsistenciaController extends Controller
                 'message' => 'Ocurrió un error al registrar la solicitud.'
             ], 500);
         }
-
     }
 
 
     public function show(string $id)
     {
-        //
+        $solicitud = SolicitudAsistencia::with(
+            'cliente',
+            'tecnico',
+            'vehiculo',
+            'servicio'
+        )->find($id);
+
+        if (!$solicitud) {
+            return response()->json([
+                'status' => false,
+                'error' => 'No se encontró la solicitud de asistencia',
+            ], 404);
+        }
+
+        return response()->json($solicitud, 200);
     }
 
 
@@ -136,12 +154,75 @@ class SolicitudAsistenciaController extends Controller
 
     public function update(Request $request, string $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'tecnico_id' => 'required',
+            'estado' => 'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'error' => $validator->errors()
+            ], 400);
+        }
+
+        // Comenzar la transacción
+        DB::beginTransaction();
+
+        try {
+            $solicitud = SolicitudAsistencia::find($id);
+
+            if (!$solicitud) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Solicitud de asistencia no encontrada.',
+                ], 404);
+            }
+
+            $solicitud->tecnico_id = $request->input('tecnico_id');
+            $solicitud->estado = $request->input('estado');
+
+            $solicitud->save();
+
+            // Todo salió bien, realizar la confirmación de la transacción
+            DB::commit();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Solicitud de asistencia actualizada exitosamente.',
+                'solicitud' => $solicitud,
+            ], 200);
+        } catch (\Exception $e) {
+            // Algo salió mal, revertir la transacción
+            DB::rollBack();
+
+            return response()->json([
+                'status' => false,
+                'error' => $e->getMessage(),
+                'message' => 'Ocurrió un error al actualizar la solicitud.'
+            ], 500);
+        }
     }
+
 
 
     public function destroy(string $id)
     {
-        //
+        $solicitud = SolicitudAsistencia::find($id);
+
+        if (!$solicitud) {
+            return response()->json([
+                'status' => false,
+                'error' => 'No se encontró la solicitud de asistencia',
+            ], 404);
+        }
+
+        $solicitud->delete();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Solicitud de asistencia eliminada satisfactoriamente',
+            'solicitud' => $solicitud,
+        ]);
     }
 }
