@@ -44,4 +44,8 @@ class Empleado extends Model
         return $this->hasMany(Cotizacion::class, 'empleado_id');
     }
 
+    public function solicitudesAsistencia(): HasMany {
+        return $this->hasMany(SolicitudAsistencia::class, 'tecnico_id');
+    }
+
 }

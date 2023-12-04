@@ -30,6 +30,7 @@ use App\Http\Controllers\ReportePagoController;
 use App\Http\Controllers\VentaController;
 use App\Http\Controllers\NotaCompraController;
 use App\Http\Controllers\DetalleCompraController;
+use App\Http\Controllers\SolicitudAsistenciaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -251,3 +252,6 @@ Route::post('/detalle_compras', [DetalleCompraController::class, 'store']);
 Route::get('/detalle_compras/{id}', [DetalleCompraController::class, 'show']);
 Route::put('/detalle_compras/{id}', [DetalleCompraController::class, 'update']);
 Route::delete('/detalle_compras/{id}', [DetalleCompraController::class, 'destroy']);
+
+Route::get('/solicitudes/{id}', [SolicitudAsistenciaController::class, 'getSolicitudesClienteById']);
+Route::post('/solicitudes', [SolicitudAsistenciaController::class, 'store']);

@@ -61,4 +61,9 @@ class Vehiculo extends Model
         return $this->hasMany(Cotizacion::class, 'vehiculo_id');
     }
 
+    public function solicitudesAsistencia(): HasMany
+    {
+        return $this->hasMany(SolicitudAsistencia::class, 'vehiculo_id');
+    }
+
 }

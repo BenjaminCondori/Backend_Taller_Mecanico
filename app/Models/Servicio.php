@@ -30,4 +30,8 @@ class Servicio extends Model
         return $this->belongsToMany(Cotizacion::class, 'cotizacion_servicio', 'servicio_id', 'cotizacion_id');
     }
 
+    public function solicitudesAsistencia(): HasMany {
+        return $this->hasMany(SolicitudAsistencia::class, 'servicio_id');
+    }
+
 }

@@ -34,9 +34,13 @@ class Cliente extends Model
     public function cotizaciones(): HasMany {
         return $this->hasMany(Cotizacion::class, 'cliente_id');
     }
-    
+
     public function reservas(): HasMany {
         return $this->hasMany(Reserva::class, 'cliente_id');
+    }
+
+    public function solicitudesAsistencia(): HasMany {
+        return $this->hasMany(SolicitudAsistencia::class, 'cliente_id');
     }
 
 }
