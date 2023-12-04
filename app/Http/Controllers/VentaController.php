@@ -25,8 +25,10 @@ class VentaController extends Controller
      */
     public function store(Request $request)
     {
+        $fecha = Carbon::now()->format('Y-m-d H:i:s');
+
         $venta = Venta::create([
-        'fecha' => Carbon::now(),
+        'fecha' => $fecha,
         'monto' => $request->monto,
         'cliente_id' => $request->cliente_id,]);
 
@@ -112,6 +114,8 @@ class VentaController extends Controller
             'producto_preciototal' => $request->producto_preciototal,
         ]);
 
+        $this->actualizarTotal($venta);
+
         return response()->json([
             'status' => true,
             'message' => 'Producto insertado en la venta satisfactoriamente',
@@ -119,6 +123,7 @@ class VentaController extends Controller
         ], 201);
     }
 
+// esta funcion revisa cada registro de VentaProducto y suma los montos para sacar el monto total de la venta
     public function actualizarTotal(Venta $venta)
     {
         if (!$venta) {
@@ -143,23 +148,22 @@ class VentaController extends Controller
         ], 200);
     }
 
-    public function destroyProductos(string $id)
+    public function destroyProductos(Venta $venta, string $id)
     {
-        $ventaProducto = VentaProducto::find($id);
-
-        if (!$ventaProducto) {
+        if (!$venta) {
             return response()->json([
                 'status' => false,
                 'error' => 'No se encontró el registro VentaProducto',
             ], 404);
         }
 
-        $ventaProducto->delete();
+        $venta->productos()->detach($id);
+        $this->actualizarTotal($venta);
 
         return response()->json([
             'status' => true,
             'message' => 'Producto eliminado de la venta satisfactoriamente',
-            'cotiProducto' => $ventaProducto
+            'VentaProductos' => $venta->productos()->get() 
         ]);
     }
 }
