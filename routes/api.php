@@ -27,6 +27,7 @@ use App\Http\Controllers\FacturaController;
 use App\Http\Controllers\ReporteOrdenTrabajoController;
 use App\Http\Controllers\ReporteCotizacionController;
 use App\Http\Controllers\ReportePagoController;
+use App\Http\Controllers\SolicitudAsistenciaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -226,3 +227,6 @@ Route::get  ('/reservas/{id}', [ReservaController::class, 'show']);
 Route::put  ('/reservas/{id}', [ReservaController::class, 'update']);
 Route::delete   ('/reservas/{id}', [ReservaController::class, 'destroy']);
 
+
+Route::get('/solicitudes/{id}', [SolicitudAsistenciaController::class, 'getSolicitudesClienteById']);
+Route::post('/solicitudes', [SolicitudAsistenciaController::class, 'store']);
