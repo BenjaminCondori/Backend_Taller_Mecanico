@@ -13,7 +13,7 @@ class CompraProductoSeeder extends Seeder
      */
     public function run(): void
     {
-        CompraProducto::create([
+       /* CompraProducto::create([
             'compra_id' => 1,
             'producto_id' => 1,
             'producto_cantidad' => 3,
@@ -42,6 +42,6 @@ class CompraProductoSeeder extends Seeder
             'producto_id' => 2,
             'producto_cantidad' => 1,
             'producto_preciototal' => 100,
-        ]);
+        ]);*/
     }
 }

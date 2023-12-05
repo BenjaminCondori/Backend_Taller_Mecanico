@@ -28,8 +28,7 @@ use App\Http\Controllers\ReporteOrdenTrabajoController;
 use App\Http\Controllers\ReporteCotizacionController;
 use App\Http\Controllers\ReportePagoController;
 use App\Http\Controllers\VentaController;
-use App\Http\Controllers\NotaCompraController;
-use App\Http\Controllers\DetalleCompraController;
+use App\http\Controllers\CompraController;
 use App\Http\Controllers\SolicitudAsistenciaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -241,17 +240,16 @@ Route::post('/ventas/{venta}/productos',[VentaController::class,'storeProductos'
 Route::delete('/ventas/{venta}/productos/{id}',[VentaController::class,'destroyProductos']);
 Route::get('/ventas/{venta}/actualizartotal',[VentaController::class,'actualizarTotal']);
 
-Route::get('/nota_compras', [NotaCompraController::class, 'index']);
-Route::post('/nota_compras', [NotaCompraController::class, 'store']);
-Route::get('/nota_compras/{id}', [NotaCompraController::class, 'show']);
-Route::put('/nota_compras/{id}', [NotaCompraController::class, 'update']);
-Route::delete('/nota_compras/{id}', [NotaCompraController::class, 'destroy']);
+Route::get('/compras', [CompraController::class, 'index']);
+Route::post('/compras', [CompraController::class, 'store']);
+Route::get('/compras/{id}', [CompraController::class, 'show']);
+Route::put('/compras/{id}', [CompraController::class, 'update']);
+Route::delete('/compras/{id}', [CompraController::class, 'destroy']);
+Route::get('/compras/{compra}/productos', [CompraController::class, 'indexProductos']);
+Route::post('/compras/{compra}/productos', [CompraController::class, 'storeProductos']);
+Route::delete('/compras/{compra}/productos/{id}', [CompraController::class, 'destroyProductos']);
+Route::get('/compras/{compra}/actualizartotal', [CompraController::class, 'actualizarTotal']);
 
-Route::get('/detalle_compras', [DetalleCompraController::class, 'index']);
-Route::post('/detalle_compras', [DetalleCompraController::class, 'store']);
-Route::get('/detalle_compras/{id}', [DetalleCompraController::class, 'show']);
-Route::put('/detalle_compras/{id}', [DetalleCompraController::class, 'update']);
-Route::delete('/detalle_compras/{id}', [DetalleCompraController::class, 'destroy']);
 
 Route::get('/solicitudes/{id}', [SolicitudAsistenciaController::class, 'getSolicitudesClienteById']);
 Route::get('/solicitudes', [SolicitudAsistenciaController::class, 'index']);

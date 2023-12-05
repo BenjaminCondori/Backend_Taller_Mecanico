@@ -12,7 +12,7 @@ class CompraSeeder extends Seeder
      * Run the database seeds.
      */
     public function run(): void
-    {
+    {/*
         Compra::create([
             'fecha' => '2023-11-30',
             'monto' => '200',
@@ -27,6 +27,6 @@ class CompraSeeder extends Seeder
             'fecha' => '2023-12-2',
             'monto' => '699',
             'proveedor_id' => 1,
-        ]);
+        ]);*/
     }
 }
