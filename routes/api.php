@@ -239,6 +239,7 @@ Route::get('/ventas/{venta}/productos',[VentaController::class,'indexProductos']
 Route::post('/ventas/{venta}/productos',[VentaController::class,'storeProductos']);
 Route::delete('/ventas/{venta}/productos/{id}',[VentaController::class,'destroyProductos']);
 Route::get('/ventas/{venta}/actualizartotal',[VentaController::class,'actualizarTotal']);
+Route::get('/ventas/{venta}/generarpago',[VentaController::class,'generarPago']);
 
 Route::get('/compras', [CompraController::class, 'index']);
 Route::post('/compras', [CompraController::class, 'store']);
