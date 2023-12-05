@@ -251,7 +251,7 @@ Route::delete('/compras/{compra}/productos/{id}', [CompraController::class, 'des
 Route::get('/compras/{compra}/actualizartotal', [CompraController::class, 'actualizarTotal']);
 
 
-Route::get('/solicitudes/{id}', [SolicitudAsistenciaController::class, 'getSolicitudesClienteById']);
+Route::get('/solicitudes/cliente/{id}', [SolicitudAsistenciaController::class, 'getSolicitudesClienteById']);
 Route::get('/solicitudes', [SolicitudAsistenciaController::class, 'index']);
 Route::get('/solicitudes/{id}', [SolicitudAsistenciaController::class, 'show']);
 Route::post('/solicitudes', [SolicitudAsistenciaController::class, 'store']);
