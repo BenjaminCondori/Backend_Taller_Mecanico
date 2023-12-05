@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('detalle_compra', function (Blueprint $table) {
+        Schema::create('compra_producto', function (Blueprint $table) {
             $table->id();
-            $table->integer('cantidad');
-            $table->decimal('importe', 10, 2);
-            $table->decimal('precio', 10, 2);
-            $table->unsignedBigInteger('nota_compra_id');
-            $table->foreign('nota_compra_id')->references('id')->on('nota_compra')->onDelete('cascade')->onUpdate('cascade');
+            $table->unsignedBigInteger('compra_id');
+            $table->foreign('compra_id')->references('id')->on('compra')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('producto_id');
             $table->foreign('producto_id')->references('id')->on('productos')->onDelete('cascade')->onUpdate('cascade');
+            $table->integer('producto_cantidad');
+            $table->decimal('producto_preciototal');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('detalle_compra');
+        Schema::dropIfExists('compra_producto');
     }
 };

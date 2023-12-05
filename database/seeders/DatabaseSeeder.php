@@ -40,8 +40,8 @@ class DatabaseSeeder extends Seeder
             ReservaSeeder::class,
             VentaSeeder::class,
             VentaProductoSeeder::class,
-            NotaCompraSeeder::class,
-            DetalleCompraSeeder::class,
+            CompraSeeder::class,
+            CompraProductoSeeder::class,
         ]);
     }
 }
