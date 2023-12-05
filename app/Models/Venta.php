@@ -15,11 +15,16 @@ class Venta extends Model
         'fecha',
         'monto',
         'cliente_id',
+        'empleado_id',
         'pago_id',
     ];
 
     public function cliente(): BelongsTo {
         return $this->belongsTo(Cliente::class, 'cliente_id');
+    }
+
+    public function empleado(): BelongsTo {
+        return $this->belongsTo(Empleado::class, 'empleado_id');
     }
 
     public function pago(): BelongsTo {

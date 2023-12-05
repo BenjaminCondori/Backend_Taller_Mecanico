@@ -240,6 +240,7 @@ Route::get('/ventas/{venta}/productos',[VentaController::class,'indexProductos']
 Route::post('/ventas/{venta}/productos',[VentaController::class,'storeProductos']);
 Route::delete('/ventas/{venta}/productos/{id}',[VentaController::class,'destroyProductos']);
 Route::get('/ventas/{venta}/actualizartotal',[VentaController::class,'actualizarTotal']);
+Route::get('/ventas/{venta}/generarpago',[VentaController::class,'generarPago']);
 
 Route::get('/nota_compras', [NotaCompraController::class, 'index']);
 Route::post('/nota_compras', [NotaCompraController::class, 'store']);

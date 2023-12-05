@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pago;
 use App\Models\Venta;
 use App\Models\VentaProducto;
 use Carbon\Carbon;
@@ -15,7 +16,7 @@ class VentaController extends Controller
      */
     public function index()
     {
-        $ventas = Venta::with('cliente','pago')->get();
+        $ventas = Venta::with('cliente','empleado','pago')->get();
 
         return response()->json($ventas);
     }
@@ -30,7 +31,8 @@ class VentaController extends Controller
         $venta = Venta::create([
         'fecha' => $fecha,
         'monto' => $request->monto,
-        'cliente_id' => $request->cliente_id,]);
+        'cliente_id' => $request->cliente_id,
+        'empleado_id' => $request->empleado_id ]);
 
         return response()->json([
             'status' => true,
@@ -46,6 +48,7 @@ class VentaController extends Controller
     {
         $venta = Venta::with(
             'cliente',
+            'empleado',
             'productos',
             'pago'          
         )->find($id);
@@ -148,8 +151,37 @@ class VentaController extends Controller
         ], 200);
     }
 
+    public function generarPago(Venta $venta)
+    {
+        if (!$venta) {
+            return response()->json([
+                'status' => false,
+                'error' => 'No se encontró la venta'
+            ], 404);
+        }
+
+        $pago = Pago::create([
+            'fecha' => Carbon::now()->format('Y-m-d H:i:s'),
+            'monto' => $venta->monto,
+            'estado' => false,
+            'concepto' => 'Venta',
+        ]);
+
+        $venta->update([
+            'pago_id' =>$pago->id
+        ]);
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Pago para venta generado exitosamente',
+            'venta' => $venta->with('pago')->find($venta->id)
+        ], 200);
+
+    }
+
     public function destroyProductos(Venta $venta, string $id)
     {
+        
         if (!$venta) {
             return response()->json([
                 'status' => false,
